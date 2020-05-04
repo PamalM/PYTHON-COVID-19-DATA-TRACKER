@@ -1,2 +1,18 @@
 # Default ignored files
 /workspace.xml
+
+#vscode
+.vscode/*
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/extensions.json
+.vscode/.ropeproject
+*.code-workspace
+
+#python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
