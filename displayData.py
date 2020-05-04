@@ -7,10 +7,17 @@
 import main
 import requests
 
+#Each country is associated with it's own API request url.
+
+#The API documentation for Postman has different 'slug' urls for each country. 
+countrySlug = {0: "united-states",
+               1: "canada",
+               2: "france",
+               3: "united-kingdom",
+               4: "spain",
+               5: "italy"}
+
 def display(countryCode):
-    response = requests.get("https://api.covid19api.com/live/country/canada")
+    response = requests.get("https://api.covid19api.com/live/country/" + countrySlug.get(countryCode))
     print(response.text.encode('utf8'))
 
-
-#For testing purposes just run data for U.S.A currently.
-display(0)
