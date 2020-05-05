@@ -25,7 +25,6 @@ def display(countryCode):
     #TODO Check to see if data is already written to local json
     #TODO otherwise obtain new data from API
 
-
     #Fetch most recent data from Covid19 API and update the JSON directory
     response = requests.get("https://api.covid19api.com/live/country/" + countrySlug.get(countryCode))
     __parseJson(response.json())
@@ -42,19 +41,24 @@ def __parseJson(data):
 
     provinces = []
     [provinces.append(value["Province"]) for value in data if(value["Province"] not in provinces)]
+    __parseProvinces(country, provinces)
 
     # dates = []
     # [dates.append(value["Date"]) for value in data if(value["Date"] not in dates)]
 
 def __parseCountry(country):
+    print("Parsing Country: "+country)
+
     #Check if country's directory exists, if not, create it
     fileManager.mkdir(f"JSON/Countries/{country}")
 
+    countriesjsonpath = "JSON/countries.json"
+
     #Check if countries json file exists, if not, create it
-    fileManager.jsonPreset("JSON/countries.json","countries")
+    fileManager.jsonPreset(countriesjsonpath,"countries")
 
     #Load existing countries.json file
-    countrieslist = fileManager.readList("JSON/countries.json","countries")
+    countrieslist = fileManager.readList(countriesjsonpath,"countries")
 
     #Check if the countries list already contains the country file path
     iscontained = False
@@ -65,18 +69,47 @@ def __parseCountry(country):
     if not iscontained:
         #Create the json file for the given country
         filename = country.lower().replace(" ","-")
-        fileManager.jsonPreset(f"JSON/Countries/{country}/{filename}.json","provinces")
+        path = f"JSON/Countries/{country}/{filename}.json"
+        fileManager.jsonPreset(path,"provinces")
 
-        newinfodict = {"country":country,"file":f"JSON/Countries/{country}/{filename}.json"}
+        newinfodict = {"country":country,"file":path}
         countrieslist.append(newinfodict)
 
     #Rewrite the json file
-    fileManager.writeList("JSON/countries.json","countries",countrieslist)
+    fileManager.writeList(countriesjsonpath,"countries",countrieslist)
 
-def __parseProvinces(provinces):
-    pass
+def __parseProvinces(country,provinces):
+    for province in provinces:
+        print("Parsing Province: "+province)
 
+        #Check if province's directory exists, if not, create it
+        fileManager.mkdir(f"JSON/Countries/{country}/{province}")
 
+        provincesjsonpath = f"JSON/Countries/{country}/provinces.json"
+
+        #Check if provinces json file exists, if not, create it
+        fileManager.jsonPreset(provincesjsonpath,"provinces")
+
+        #Load existing provinces.json file
+        provinceslist = fileManager.readList(provincesjsonpath,"provinces")
+
+        #Check if the provinces list already contains the country file path
+        iscontained = False
+        for provinceinfodict in provinceslist:
+            if(provinceinfodict["province"] is province): iscontained = True
+
+        #If the country isn't contained append the new country's dict to the provinces list
+        if not iscontained:
+            #Create the json file for the given country
+            filename = province.lower().replace(" ","-")
+            path = f"JSON/Countries/{country}/{province}/{filename}.json"
+            fileManager.jsonPreset(path,"dates")
+
+            newinfodict = {"province":province,"file":path}
+            provinceslist.append(newinfodict)
+
+        #Rewrite the json file
+        fileManager.writeList(provincesjsonpath,"provinces",provinceslist)
 
 
 display(0)
