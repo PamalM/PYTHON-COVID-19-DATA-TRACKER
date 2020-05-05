@@ -1,0 +1,39 @@
+
+{
+    "canada":
+    [
+        {
+            "confirmed":1588,
+            "deaths":70,
+            "recovered":1,
+            "active":1517,
+            "provinces":
+            [
+                {
+                    "name":"British Columbia",
+                    "days":
+                    [
+                        {
+                            "confirmed":1445,
+                            "deaths":58,
+                            "recovered":0,
+                            "active":1387
+                        }
+                    ]
+                },
+                {
+                    "name":"Nova Scotia",
+                    "days":
+                    [
+                        {
+                            "confirmed":143,
+                            "deaths":12,
+                            "recovered":1,
+                            "active":130
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

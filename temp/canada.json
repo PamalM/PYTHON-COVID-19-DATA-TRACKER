@@ -1,0 +1,12 @@
+{
+    "confirmed":1588,
+    "deaths":70,
+    "recovered":1,
+    "active":1517,
+    "provinces":[
+        {
+            "province":"British Columbia",
+            "file":"JSON/Countries/British-Columbia.json"
+        }
+    ]
+}
