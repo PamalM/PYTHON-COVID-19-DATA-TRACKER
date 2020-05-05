@@ -82,6 +82,7 @@ def __parseCountry(country):
 
 def __parseProvinces(country,provinces):
     for province in provinces:
+        if province == "": province = "All"
         print("Parsing Province: "+province)
 
         #Check if province's directory exists, if not, create it
@@ -116,6 +117,10 @@ def __parseProvinces(country,provinces):
 
 def __parseDates(country,province,dates,data):
     for date in dates:
+        #Used to check the data file with the original name of province
+        checkprovince = province
+        if province == "": province = "All"
+
         print("Parsing Date: "+date+" for Province: "+province)
 
         #Check if date's directory exists, if not, create it
@@ -147,7 +152,7 @@ def __parseDates(country,province,dates,data):
                 recovered = 0
                 active = 0
                 for value in data:
-                    if(value["Date"].startswith(date) and value["Province"] == province):
+                    if(value["Date"].startswith(date) and value["Province"] == checkprovince):
                         confirmed = value["Confirmed"]
                         deaths = value["Deaths"]
                         recovered = value["Recovered"]
@@ -164,4 +169,4 @@ def __parseDates(country,province,dates,data):
         #Rewrite the json file
         fileManager.writeList(datesjsonpath,"dates",dateslist)
 
-display(0)
+display(4)
