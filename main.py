@@ -14,17 +14,14 @@ import displayData
 def selection_GUI():
     # Method displays the selected radio button country/worldwide selection back to the user before entering next view.
     def selected_Country(*_):
-        global selectedCountry
-        selectedCountry = country.get()
-
         # Valid radio button selection has been made, so make button visible. Allow user to proceed to next view.
         nextButton.configure(state=NORMAL)
 
-        # Finally, return back the integer value associated with the country.
+        # Finally, return the selected country back to the user.
         return country.get()
 
     def nextGUI():
-        # Pass the country code to the displayData.py's display(countryCode) method to inititate the display of data.
+        # Pass the country Slug to the displayData.py's display(countrySlug) method to initiate the display of data.
         displayData.display(country.get())
 
     # Create tkinter window object.
@@ -51,43 +48,43 @@ def selection_GUI():
     usaLabel = Label(countries_Frame, image=usaFlag, background=countryBG)
     usaLabel.grid(row=1, column=0, sticky=W + E)
 
-    R1 = Radiobutton(countries_Frame, text="USA", value="united-states", var=country, font=("Courier", 20, "bold"))
-    R1.grid(row=1, column=1, sticky=W + E)
+    r1 = Radiobutton(countries_Frame, text="USA", value="united-states", var=country, font=("Courier", 20, "bold"))
+    r1.grid(row=1, column=1, sticky=W + E)
 
     canadaFlag = ImageTk.PhotoImage(Image.open('Flags/canada.png').resize((80, 40), Image.ANTIALIAS))
     canadaLabel = Label(countries_Frame, image=canadaFlag, background=countryBG)
     canadaLabel.grid(row=2, column=0, sticky=W + E)
 
-    R2 = Radiobutton(countries_Frame, text="CANADA", value="canada", var=country, font=("Courier", 20, "bold"))
-    R2.grid(row=2, column=1, sticky=W + E)
+    r2 = Radiobutton(countries_Frame, text="CANADA", value="canada", var=country, font=("Courier", 20, "bold"))
+    r2.grid(row=2, column=1, sticky=W + E)
 
     franceFlag = ImageTk.PhotoImage(Image.open('Flags/france.png').resize((80, 40), Image.ANTIALIAS))
     franceLabel = Label(countries_Frame, image=franceFlag, background=countryBG)
     franceLabel.grid(row=1, column=2, sticky=W + E)
 
-    R3 = Radiobutton(countries_Frame, text="FRANCE", value="france", var=country, font=("Courier", 20, "bold"))
-    R3.grid(row=1, column=3, sticky=W + E)
+    r3 = Radiobutton(countries_Frame, text="FRANCE", value="france", var=country, font=("Courier", 20, "bold"))
+    r3.grid(row=1, column=3, sticky=W + E)
 
     ukFlag = ImageTk.PhotoImage(Image.open('Flags/united-kingdom.png').resize((80, 40), Image.ANTIALIAS))
     ukLabel = Label(countries_Frame, image=ukFlag, background=countryBG)
     ukLabel.grid(row=2, column=2, sticky=W + E)
 
-    R4 = Radiobutton(countries_Frame, text="U.K", value="united-kingdom", var=country, font=("Courier", 20, "bold"))
-    R4.grid(row=2, column=3, sticky=W + E)
+    r4 = Radiobutton(countries_Frame, text="U.K", value="united-kingdom", var=country, font=("Courier", 20, "bold"))
+    r4.grid(row=2, column=3, sticky=W + E)
 
     spainFlag = ImageTk.PhotoImage(Image.open('Flags/spain.png').resize((80, 40), Image.ANTIALIAS))
     spainLabel = Label(countries_Frame, image=spainFlag, background=countryBG)
     spainLabel.grid(row=1, column=4, sticky=W + E)
 
-    R5 = Radiobutton(countries_Frame, text="SPAIN", value="spain", var=country, font=("Courier", 20, "bold"))
-    R5.grid(row=1, column=5, sticky=W + E)
+    r5 = Radiobutton(countries_Frame, text="SPAIN", value="spain", var=country, font=("Courier", 20, "bold"))
+    r5.grid(row=1, column=5, sticky=W + E)
 
     italyFlag = ImageTk.PhotoImage(Image.open('Flags/italy.png').resize((80, 40), Image.ANTIALIAS))
     italyLabel = Label(countries_Frame, image=italyFlag, background=countryBG)
     italyLabel.grid(row=2, column=4, sticky=W + E)
 
-    R6 = Radiobutton(countries_Frame, text="ITALY", value="italy", var=country, font=("Courier", 20, "bold"))
-    R6.grid(row=2, column=5, sticky=W + E)
+    r6 = Radiobutton(countries_Frame, text="ITALY", value="italy", var=country, font=("Courier", 20, "bold"))
+    r6.grid(row=2, column=5, sticky=W + E)
 
     # Draw ['Next'] button into box.
     # Button will direct user to the displayData script, and pass on the selected country to the file; Disable button until valid radiobutton selection is made.
@@ -116,8 +113,8 @@ def selection_GUI():
     worldLabel = Label(worldwide_Frame, image=worldFlag, background=countryBG)
     worldLabel.grid(row=0)
 
-    R7 = Radiobutton(worldwide_Frame, text="WORLDWIDE", value="WORLDWIDE", var=country, font=("Courier", 20, "bold"))
-    R7.grid(row=1, column=0)
+    r7 = Radiobutton(worldwide_Frame, text="WORLDWIDE", value="WORLDWIDE", var=country, font=("Courier", 20, "bold"))
+    r7.grid(row=1, column=0)
 
     # Draw in the worldwide frame box container.
     worldwide_Frame.rowconfigure(0, weight=1)

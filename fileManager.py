@@ -1,3 +1,5 @@
+# Holds the helper methods for parsing/reading the json files.
+
 import os
 import json
 
