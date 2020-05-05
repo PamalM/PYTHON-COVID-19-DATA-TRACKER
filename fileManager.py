@@ -2,7 +2,7 @@ import os
 import json
 
 #Makes the directories in the path if they don't already exist
-def mkdir(path):
+def mkexistsdir(path):
     if not os.path.isdir(path):
         os.makedirs(path)
 

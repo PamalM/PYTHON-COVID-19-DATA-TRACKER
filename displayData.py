@@ -43,14 +43,16 @@ def __parseJson(data):
     [provinces.append(value["Province"]) for value in data if(value["Province"] not in provinces)]
     __parseProvinces(country, provinces)
 
-    # dates = []
-    # [dates.append(value["Date"]) for value in data if(value["Date"] not in dates)]
+    for province in provinces:
+        dates = []
+        [dates.append(value["Date"][0:10]) for value in data if(value["Date"] not in dates and value["Province"] == province)]
+        __parseDates(country, province, dates, data)
 
 def __parseCountry(country):
     print("Parsing Country: "+country)
 
     #Check if country's directory exists, if not, create it
-    fileManager.mkdir(f"JSON/Countries/{country}")
+    fileManager.mkexistsdir(f"JSON/Countries/{country}")
 
     countriesjsonpath = "JSON/countries.json"
 
@@ -83,9 +85,10 @@ def __parseProvinces(country,provinces):
         print("Parsing Province: "+province)
 
         #Check if province's directory exists, if not, create it
-        fileManager.mkdir(f"JSON/Countries/{country}/{province}")
+        fileManager.mkexistsdir(f"JSON/Countries/{country}/{province}")
 
-        provincesjsonpath = f"JSON/Countries/{country}/provinces.json"
+        jsonname = country.lower().replace(" ","-")
+        provincesjsonpath = f"JSON/Countries/{country}/{jsonname}.json"
 
         #Check if provinces json file exists, if not, create it
         fileManager.jsonPreset(provincesjsonpath,"provinces")
@@ -93,14 +96,14 @@ def __parseProvinces(country,provinces):
         #Load existing provinces.json file
         provinceslist = fileManager.readList(provincesjsonpath,"provinces")
 
-        #Check if the provinces list already contains the country file path
+        #Check if the provinces list already contains the province file path
         iscontained = False
         for provinceinfodict in provinceslist:
             if(provinceinfodict["province"] is province): iscontained = True
 
-        #If the country isn't contained append the new country's dict to the provinces list
+        #If the province isn't contained append the new province's dict to the provinces list
         if not iscontained:
-            #Create the json file for the given country
+            #Create the json file for the given province
             filename = province.lower().replace(" ","-")
             path = f"JSON/Countries/{country}/{province}/{filename}.json"
             fileManager.jsonPreset(path,"dates")
@@ -111,5 +114,54 @@ def __parseProvinces(country,provinces):
         #Rewrite the json file
         fileManager.writeList(provincesjsonpath,"provinces",provinceslist)
 
+def __parseDates(country,province,dates,data):
+    for date in dates:
+        print("Parsing Date: "+date+" for Province: "+province)
+
+        #Check if date's directory exists, if not, create it
+        fileManager.mkexistsdir(f"JSON/Countries/{country}/{province}/{date}")
+
+        jsonname = province.lower().replace(" ","-")
+        datesjsonpath = f"JSON/Countries/{country}/{province}/{jsonname}.json"
+
+        #Check if dates json file exists, if not, create it
+        fileManager.jsonPreset(datesjsonpath,"dates")
+
+        #Load existing dates.json file
+        dateslist = fileManager.readList(datesjsonpath,"dates")
+
+        #Check if the dates list already contains the dates file path
+        iscontained = False
+        for dateinfodict in dateslist:
+            if(dateinfodict["date"] is date): iscontained = True
+
+        #If the date isn't contained append the new date's dict to the dates list
+        if not iscontained:
+            #Create the json file for the given date
+            filename = date
+            path = f"JSON/Countries/{country}/{province}/{date}/{filename}.json"
+            if not os.path.exists(path):
+                #Retrive date's statistics
+                confirmed = 0
+                deaths = 0
+                recovered = 0
+                active = 0
+                for value in data:
+                    if(value["Date"].startswith(date) and value["Province"] == province):
+                        confirmed = value["Confirmed"]
+                        deaths = value["Deaths"]
+                        recovered = value["Recovered"]
+                        active = value["Active"]
+
+                f = open(path,"w+")
+                tempdict = {"confirmed":confirmed,"deaths":deaths,"recovered":recovered,"active":active}
+                f.write(json.dumps(tempdict))
+                f.close()
+
+            newinfodict = {"date":date,"file":path}
+            dateslist.append(newinfodict)
+
+        #Rewrite the json file
+        fileManager.writeList(datesjsonpath,"dates",dateslist)
 
 display(0)
