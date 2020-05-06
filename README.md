@@ -1,21 +1,19 @@
-# PYTHON-COVID-19-DATA-TRACKER
+# COVID-19-DATA-TRACKER
     
 **Project Documentation:**    
 https://drive.google.com/open?id=1Hn9y1LzmmYaC-9JFyxvaXLM0P3F_W8oe
 
 *The link contains all relevant documentation for the project.*
 
-*(Currently the link only contains the project's storyboard.)*
-
-The goal with this project is to implement a graphical solution to displaying live COVID-19 data from the internet. Our aim with this project is to retrieve relevant data, such as #Deaths, #Recovered Cases, and #Total Cases worldwide; Or particular to a specific country. 
-
     Project Description:
-We will retrive such data and visualize it into 3 sub-plots. Please refer to the google drive link above to obtain a rough idea of what to begin with. Please note, this storyboard and any of the project documentation is subject to change. So always refer to the google drive link provided above, for updated instructions and/or information relating to this project. 
+The goal with this project was to implement a live COVID-19 (Coronavirus) statistics tracker. The user has the ability to view statistics for worldwide, and/or specific stats for a given country. Currently, the solution is only implemented for 6 selected countries, but more countries will be added in the near future, or as demand requires. 
 
+This Python script allows users to display live up to date information right on their desktop. We utilized key concepts such as json parsing, the tkinter, and matplotlib libraries. We will allow the user to see information for today's date, and view a graphical depiction of the last month's COVID-19 trend. Displaying information is one aspect, but analyzing trends is another goal with this project. In addition, the applicaiton will have additional features such as: Live vaccine updates, news relating to COVID-19 worldwide, and relevant stock data for companies that are on the front-lines of fighting the virus. 
 
-If you are interested, you may also email Pamal13@Hotmail.com to be invited to the Discord server with the other contributers on the project. We will be disucssing more in-depth. I haven't made the server public to minimize random people from joining. In your email please include your name, and an email will be sent back to you containing the private link. 
+Currently we have a discord server setup for the team working on the project. All communication is conducted through that server. If you wish to participate in the development of this project, please get in contact with me to be added to the team. 
+In your email, please include your full name, github username, and email/phone contact method for verifying your legitimacy. 
 
-
-Thanks for contributing and/or viewing the repo. 
+Thanks for visiting the repo, if you have any questions please feel free to contact me. 
+Pamal13@Hotmail.com, 
 
 Stay safe, and hopefully life as we know it, can return back to normal!

@@ -1,8 +1,6 @@
-#This (.py) handles the display of data.
-#When user makes a selection on the main.py, they are directed to this script upon the ['Next'] button click.
-
-#For reference, please remember that the countries are associated with an integer value, that is specific to each country.
-#Where, [USA = 0, CANADA = 1, FRANCE = 2, U.K = 3, SPAIN = 4, ITALY = 5, WORLDWIDE = 6]
+# This (.py) handles the display of data, and fetching of information for countries.
+# We will make the API request and fetch information as needed, if it is out of date.
+# When user makes a selection on the main.py, they are directed to this script upon the ['Next'] button click.
 
 import APIInterpreter as interpreter
 
@@ -23,7 +21,5 @@ def display(countryCode):
 
 for i in range(5):
     display(i)
-
-
 
 
