@@ -8,11 +8,9 @@ def parseJson(data, slug):
     #Get country name
     country = data[0]["Country"]
 
-
     #Get list of provinces
     provinces = []
     [provinces.append(value["Province"]) for value in data if(value["Province"] not in provinces)]
-
 
     #Get list of dates for each province
     for province in provinces:
@@ -106,7 +104,6 @@ def __parseProvinces(country,provinces,data):
         if(index < len(provinceslist)): provinceslist[index] = newinfodict
         else: provinceslist.append(newinfodict)
 
-
         #Rewrite the json file
         fileManager.writeList(provincesjsonpath,"provinces",provinceslist)
 
@@ -167,8 +164,8 @@ def getCases(slug, attempts=3):
     nocases = {"confirmed": -1,"deaths": -1,"recovered": -1,"active": -1}
 
     #Searches through the countries json file to pick the appropriate country's case numbers
-    if(fileManager.exists("JSON\countries.json")):
-        countries = fileManager.readJson("JSON\countries.json")
+    if(fileManager.exists("JSON/countries.json")):
+        countries = fileManager.readJson("JSON/countries.json")
         cases = [country["cases"] for country in countries["countries"] if country["slug"] == slug]
         #Provided the country exists in the database the country's case counts will be returned
         if cases != []: return cases[0]

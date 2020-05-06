@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="52be5131-cd8f-48f6-b35d-fb0786034c78" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Flags/united-kingdom.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Flags/united-states.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/PYTHON-COVID-19-DATA-TRACKER.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PYTHON-COVID-19-DATA-TRACKER.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIInterpreter.py" beforeDir="false" afterPath="$PROJECT_DIR$/APIInterpreter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/displayData.py" beforeDir="false" afterPath="$PROJECT_DIR$/displayData.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fileManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
@@ -106,29 +104,41 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1588714374641" />
-    <state width="1419" height="245" key="GridCell.Tab.0.bottom" timestamp="1588715902941">
+    <state width="1419" height="245" key="GridCell.Tab.0.bottom" timestamp="1588808742267">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1588715902941" />
-    <state width="1419" height="245" key="GridCell.Tab.0.center" timestamp="1588715902939">
+    <state width="1419" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1588808742267" />
+    <state width="1419" height="245" key="GridCell.Tab.0.bottom/0.23.1440.805@0.23.1440.805" timestamp="1588808686164" />
+    <state width="1419" height="245" key="GridCell.Tab.0.center" timestamp="1588808742266">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1588715902939" />
-    <state width="1419" height="245" key="GridCell.Tab.0.left" timestamp="1588715902939">
+    <state width="1419" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1588808742266" />
+    <state width="1419" height="245" key="GridCell.Tab.0.center/0.23.1440.805@0.23.1440.805" timestamp="1588808686163" />
+    <state width="1419" height="245" key="GridCell.Tab.0.left" timestamp="1588808742266">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1588715902939" />
-    <state width="1419" height="245" key="GridCell.Tab.0.right" timestamp="1588715902940">
+    <state width="1419" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1588808742266" />
+    <state width="1419" height="245" key="GridCell.Tab.0.left/0.23.1440.805@0.23.1440.805" timestamp="1588808686162" />
+    <state width="1419" height="245" key="GridCell.Tab.0.right" timestamp="1588808742267">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1588715902940" />
+    <state width="1419" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1588808742267" />
+    <state width="1419" height="245" key="GridCell.Tab.0.right/0.23.1440.805@0.23.1440.805" timestamp="1588808686163" />
     <state x="221" y="89" key="SettingsEditor" timestamp="1588714312705">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1588714312705" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1588808925697">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1588808925697" />
     <state x="397" y="282" key="com.intellij.ide.util.TipDialog" timestamp="1588714258608">
       <screen x="0" y="23" width="1440" height="805" />
     </state>
     <state x="397" y="282" key="com.intellij.ide.util.TipDialog/0.23.1440.805@0.23.1440.805" timestamp="1588714258608" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1588802546498">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1588802546498" />
   </component>
 </project>

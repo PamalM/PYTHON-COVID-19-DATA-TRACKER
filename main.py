@@ -125,7 +125,7 @@ def selection_GUI():
     nextButton.pack(fill='x', padx=120, pady=(10, 0))
 
     # Window attributes for root; (Window size, bg color, title, etc. characteristics)
-    # root.resizable(False, False)
+    root.resizable(False, False)
     root.geometry("800x500")
     root.configure(background="ivory2")
     root.title("COVID-19 TRACKER")
