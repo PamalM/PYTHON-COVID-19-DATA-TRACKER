@@ -7,19 +7,9 @@ import APIInterpreter as interpreter
 #Each country is associated with it's own API request url.
 
 #The API documentation for Postman has different 'slug' urls for each country.
-countrySlug = {0: "united-states",
-               1: "canada",
-               2: "france",
-               3: "united-kingdom",
-               4: "spain",
-               5: "italy"}
-
 def display(countryCode):
-    slug = countrySlug.get(countryCode)
-    displayValues = interpreter.getCases(slug)
-    print(slug+":",displayValues)
-
-for i in range(5):
-    display(i)
+    print(countryCode)
+    displayValues = interpreter.getCases(countryCode)
+    print(displayValues)
 
 
