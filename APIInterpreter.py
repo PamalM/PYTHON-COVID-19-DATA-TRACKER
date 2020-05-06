@@ -3,7 +3,6 @@ import requests
 from datetime import datetime, timedelta
 import fileManager
 
-
 #Reformats the returned json and organizes information into subdirectories
 def parseJson(data, slug):
     #Get country name
@@ -161,20 +160,25 @@ def __parseDates(country,province,dates,data):
         #Rewrite the json file
         fileManager.writeList(datesjsonpath,"dates",dateslist)
 
+#Returns a dictionary with Covid-19 Case counts
 def getCases(slug, attempts=3):
 
+    #Default cases count to return if values cannot be found
     nocases = {"confirmed": -1,"deaths": -1,"recovered": -1,"active": -1}
 
+    #Searches through the countries json file to pick the appropriate country's case numbers
     if(fileManager.exists("JSON\countries.json")):
         countries = fileManager.readJson("JSON\countries.json")
         cases = [country["cases"] for country in countries["countries"] if country["slug"] == slug]
+        #Provided the country exists in the database the country's case counts will be returned
         if cases != []: return cases[0]
+
+    #If the country's case counts can not be found the following will be executed
 
     #Fetch most recent data from Covid19 API and update the JSON directory
     print("Fetching data from API...")
     response = requests.get("https://api.covid19api.com/live/country/" + slug)
     parseJson(response.json(), slug)
-
 
     #Could not find data after x attempts, returns an invalid case dictionary
     if(attempts == 0): return nocases

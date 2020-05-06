@@ -17,7 +17,7 @@ countrySlug = {0: "united-states",
 def display(countryCode):
     slug = countrySlug.get(countryCode)
     displayValues = interpreter.getCases(slug)
-    print(displayValues)
+    print(slug+":",displayValues)
 
 for i in range(5):
     display(i)
