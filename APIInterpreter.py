@@ -3,10 +3,6 @@ import requests
 from datetime import datetime, timedelta
 import fileManager
 
-#TODO getCases doesn't check whether the latest data has been pulled
-
-#TODO getAllCases will return a list of all case dictionaries for the specified country
-
 #Reformats the returned json and organizes information into subdirectories
 def parseJson(data, slug):
     #Get country name
@@ -207,7 +203,7 @@ def __parseDates(country,province,dates,data):
         index += 1
 
 #Returns a dictionary with Covid-19 Case counts
-def getCases(slug, attempts=3):
+def getCases(slug, attempts=3, date=str(datetime.today())[0:10]):
 
     #Default cases count to return if values cannot be found
     nocases = {"confirmed": -1,"deaths": -1,"recovered": -1,"active": -1}
@@ -216,9 +212,11 @@ def getCases(slug, attempts=3):
     #Searches through the countries json file to pick the appropriate country's case numbers
     if(fileManager.exists("JSON/countries.json")):
         countries = fileManager.readJson("JSON/countries.json")
-        cases = [country["dates"][len(country["dates"])-1]["cases"] for country in countries["countries"] if country["slug"] == slug and country["dates"][len(country["dates"])-1]["date"] == str(datetime.today())[0:10]]
-        #Provided the country exists in the database the country's case counts will be returned
-        if cases != []: return cases[0]
+        targetcountry = [country for country in countries["countries"] if country["slug"] == slug]
+        for i in range(len(targetcountry[0]["dates"])):
+            cases = [country["dates"][i]["cases"] for country in countries["countries"] if country["slug"] == slug and country["dates"][i]["date"] == date]
+            #Provided the country exists in the database the country's case counts will be returned
+            if cases != []: return cases[0]
 
     #If the country's case counts can not be found the following will be executed
 
@@ -230,5 +228,20 @@ def getCases(slug, attempts=3):
     #Could not find data after x attempts, returns an invalid case dictionary
     if(attempts == 0): return nocases
     #Otherwise try again now that data has been retrieved
-    else: return getCases(slug, attempts-1)
+    else: return getCases(slug, attempts-1, date)
 
+def getCasesList(slug, attempts=3, startdate="2020-04-13", enddate=str(datetime.today())[0:10]):
+    caselist = []
+    mindate = datetime.strptime("2020-04-13 00:00:00.000000",'%Y-%m-%d %H:%M:%S.%f')
+
+    string = f'{startdate} 00:00:00.000000'
+    currentdate = datetime.strptime(string,'%Y-%m-%d %H:%M:%S.%f')
+
+    if currentdate < mindate:
+        currentdate = mindate
+
+    while str(currentdate)[0:10] != str(datetime.today()+timedelta(days=1))[0:10]:
+        caselist.append(getCases(slug, 3, str(currentdate)[0:10]))
+        currentdate += timedelta(days=1)
+
+    return caselist
