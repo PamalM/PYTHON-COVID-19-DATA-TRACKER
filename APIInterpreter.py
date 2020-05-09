@@ -189,7 +189,7 @@ def __parseDates(country,province,dates,data):
                         active = prevdate["active"]
                         recovered = prevdate["recovered"]
                     except FileNotFoundError:
-                        p
+                        pass
 
                 tempdict = {"confirmed":confirmed,"deaths":deaths,"recovered":recovered,"active":active}
                 fileManager.writeJson(path,tempdict)
@@ -208,15 +208,17 @@ def getCases(slug, attempts=3, date=str(datetime.today())[0:10]):
     #Default cases count to return if values cannot be found
     nocases = {"confirmed": -1,"deaths": -1,"recovered": -1,"active": -1}
 
-
-    #Searches through the countries json file to pick the appropriate country's case numbers
-    if(fileManager.exists("JSON/countries.json")):
-        countries = fileManager.readJson("JSON/countries.json")
-        targetcountry = [country for country in countries["countries"] if country["slug"] == slug]
-        for i in range(len(targetcountry[0]["dates"])):
-            cases = [country["dates"][i]["cases"] for country in countries["countries"] if country["slug"] == slug and country["dates"][i]["date"] == date]
-            #Provided the country exists in the database the country's case counts will be returned
-            if cases != []: return cases[0]
+    try:
+        #Searches through the countries json file to pick the appropriate country's case numbers
+        if(fileManager.exists("JSON/countries.json")):
+            countries = fileManager.readJson("JSON/countries.json")
+            targetcountry = [country for country in countries["countries"] if country["slug"] == slug]
+            for i in range(len(targetcountry[0]["dates"])):
+                cases = [country["dates"][i]["cases"] for country in countries["countries"] if country["slug"] == slug and country["dates"][i]["date"] == date]
+                #Provided the country exists in the database the country's case counts will be returned
+                if cases != []: return cases[0]
+    except IndexError:
+        pass
 
     #If the country's case counts can not be found the following will be executed
 
