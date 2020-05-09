@@ -3,6 +3,13 @@ import requests
 from datetime import datetime, timedelta
 import fileManager
 
+#TODO Some dates are missing on the API
+#TODO as a workaround use the previous dates values
+
+#TODO getCases doesn't check whether the latest data has been pulled
+
+#TODO getAllCases will return a list of all case dictionaries for the specified country
+
 #Reformats the returned json and organizes information into subdirectories
 def parseJson(data, slug):
     #Get country name
