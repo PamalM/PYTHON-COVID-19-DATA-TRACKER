@@ -3,9 +3,6 @@ import requests
 from datetime import datetime, timedelta
 import fileManager
 
-#TODO Some dates are missing on the API
-#TODO as a workaround use the previous dates values
-
 #TODO getCases doesn't check whether the latest data has been pulled
 
 #TODO getAllCases will return a list of all case dictionaries for the specified country
@@ -189,11 +186,14 @@ def __parseDates(country,province,dates,data):
                         foundfromapi = True
                         break
                 if(not foundfromapi):
-                    prevdate = fileManager.readJson(f"JSON/Countries/{country}/{province}/{dates[index-1]}/{dates[index-1]}.json")
-                    confirmed = prevdate["confirmed"]
-                    deaths = prevdate["deaths"]
-                    active = prevdate["active"]
-                    recovered = prevdate["recovered"]
+                    try:
+                        prevdate = fileManager.readJson(f"JSON/Countries/{country}/{province}/{dates[index-1]}/{dates[index-1]}.json")
+                        confirmed = prevdate["confirmed"]
+                        deaths = prevdate["deaths"]
+                        active = prevdate["active"]
+                        recovered = prevdate["recovered"]
+                    except FileNotFoundError:
+                        p
 
                 tempdict = {"confirmed":confirmed,"deaths":deaths,"recovered":recovered,"active":active}
                 fileManager.writeJson(path,tempdict)
@@ -216,7 +216,7 @@ def getCases(slug, attempts=3):
     #Searches through the countries json file to pick the appropriate country's case numbers
     if(fileManager.exists("JSON/countries.json")):
         countries = fileManager.readJson("JSON/countries.json")
-        cases = [country["dates"][len(country["dates"])-1]["cases"] for country in countries["countries"] if country["slug"] == slug]
+        cases = [country["dates"][len(country["dates"])-1]["cases"] for country in countries["countries"] if country["slug"] == slug and country["dates"][len(country["dates"])-1]["date"] == str(datetime.today())[0:10]]
         #Provided the country exists in the database the country's case counts will be returned
         if cases != []: return cases[0]
 
