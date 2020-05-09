@@ -236,13 +236,15 @@ def getCasesList(slug, attempts=3, startdate="2020-04-13", enddate=str(datetime.
     caselist = []
     mindate = datetime.strptime("2020-04-13 00:00:00.000000",'%Y-%m-%d %H:%M:%S.%f')
 
-    string = f'{startdate} 00:00:00.000000'
-    currentdate = datetime.strptime(string,'%Y-%m-%d %H:%M:%S.%f')
+    startdatestring = f'{startdate} 00:00:00.000000'
+    currentdate = datetime.strptime(startdatestring,'%Y-%m-%d %H:%M:%S.%f')
+    enddatestring = f'{enddate} 00:00:00.000000'
+    lastdate = datetime.strptime(enddatestring,'%Y-%m-%d %H:%M:%S.%f')
 
     if currentdate < mindate:
         currentdate = mindate
 
-    while str(currentdate)[0:10] != str(datetime.today()+timedelta(days=1))[0:10]:
+    while str(currentdate)[0:10] != str(lastdate)[0:10]:
         caselist.append(getCases(slug, 3, str(currentdate)[0:10]))
         currentdate += timedelta(days=1)
 
