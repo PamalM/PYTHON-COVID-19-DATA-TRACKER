@@ -38,23 +38,42 @@ def __parseCountry(country,data,slug):
 
     #Get the most recent number of cases
     dirpath = f"JSON/Countries/{country}"
-    cases = {"confirmed":0,"deaths":0,"recovered":0,"active":0}
+    cases = []
     provincecount = fileManager.directoryCount(dirpath)
     #Get the total count of case values across all provinces
+    init = False
     for i in range(provincecount):
         try:
             province = fileManager.readJson(f"{dirpath}/{jsonname}.json")["provinces"][i]
-            #If the directory contains a total count of cases across all provinces
-            #use that information
-            if province["province"] == "All Provinces":
-                cases = province["cases"]
-                break
-            #Sum up the cases from all the listed provinces
-            cases["confirmed"] += province["cases"]["confirmed"]
-            cases["deaths"] += province["cases"]["deaths"]
-            cases["recovered"] += province["cases"]["recovered"]
-            cases["active"] += province["cases"]["active"]
+            provincename = province["province"]
+            provincejsonname = provincename.lower().replace(" ","-")
 
+            datecount = fileManager.directoryCount(f"{dirpath}/{provincename}")
+
+            for j in range(datecount):
+                datesfile = fileManager.readJson(f"{dirpath}/{provincename}/{provincejsonname}.json")["dates"][j]
+                date = datesfile["date"]
+                try:
+                    if not init:
+                        newdict = {"date":date,"values":{"confirmed": 0,"deaths": 0,"recovered": 0,"active": 0}}
+                        cases.append(newdict)
+
+                    #If the directory contains a total count of cases across all provinces
+                    #use that information
+                    if provincename == "All Provinces":
+                        cases[j]["values"] = province["cases"]
+                        break
+                    #Sum up the cases from all the listed provinces
+                    # print(province["cases"])
+                    cases[j]["values"]["confirmed"] += datesfile["cases"]["confirmed"]
+                    cases[j]["values"]["deaths"] += datesfile["cases"]["deaths"]
+                    cases[j]["values"]["recovered"] += datesfile["cases"]["recovered"]
+                    cases[j]["values"]["active"] += datesfile["cases"]["active"]
+
+
+                except KeyError:
+                    continue
+            init = True
         except IndexError:
             continue
 
@@ -144,8 +163,9 @@ def __parseDates(country,province,dates,data):
                     if(value["Date"].startswith(date) and value["Province"] == checkprovince):
                         confirmed = value["Confirmed"]
                         deaths = value["Deaths"]
-                        recovered = value["Recovered"]
                         active = value["Active"]
+                        recovered = value["Recovered"]
+
 
                 tempdict = {"confirmed":confirmed,"deaths":deaths,"recovered":recovered,"active":active}
                 fileManager.writeJson(path,tempdict)
@@ -163,10 +183,11 @@ def getCases(slug, attempts=3):
     #Default cases count to return if values cannot be found
     nocases = {"confirmed": -1,"deaths": -1,"recovered": -1,"active": -1}
 
+
     #Searches through the countries json file to pick the appropriate country's case numbers
     if(fileManager.exists("JSON/countries.json")):
         countries = fileManager.readJson("JSON/countries.json")
-        cases = [country["cases"] for country in countries["countries"] if country["slug"] == slug]
+        cases = [country["cases"][len(country["cases"])-1]["values"] for country in countries["countries"] if country["slug"] == slug]
         #Provided the country exists in the database the country's case counts will be returned
         if cases != []: return cases[0]
 
