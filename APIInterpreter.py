@@ -19,10 +19,21 @@ def parseJson(data, slug):
     provinces = []
     [provinces.append(value["Province"]) for value in data if(value["Province"] not in provinces)]
 
+    #Find the earliest date listed
+    earliestdate = datetime.today()
+    for value in data:
+        string = f'{value["Date"][0:10]} 00:00:00.000000'
+        tempdate = datetime.strptime(string,'%Y-%m-%d %H:%M:%S.%f')
+        if(tempdate < earliestdate):
+            earliestdate = tempdate
+
+    dates = []
+    while str(earliestdate)[0:10] != str(datetime.today()+timedelta(days=1))[0:10]:
+        dates.append(str(earliestdate)[0:10])
+        earliestdate += timedelta(days=1)
+
     #Get list of dates for each province
     for province in provinces:
-        dates = []
-        [dates.append(value["Date"][0:10]) for value in data if(value["Date"] not in dates and value["Province"] == province)]
         __parseDates(country, province, dates, data)
 
     __parseProvinces(country, provinces, data)
@@ -138,6 +149,8 @@ def __parseDates(country,province,dates,data):
     checkprovince = province
     if province == "": province = "All Provinces"
 
+    index = 0
+
     for date in dates:
         #Check if date's directory exists, if not, create it
         fileManager.mkexistsdir(f"JSON/Countries/{country}/{province}/{date}")
@@ -161,6 +174,7 @@ def __parseDates(country,province,dates,data):
             #Create the json file for the given date
             path = f"JSON/Countries/{country}/{province}/{date}/{date}.json"
             if not fileManager.exists(path):
+                foundfromapi = False
                 #Retrive date's statistics
                 confirmed = 0
                 deaths = 0
@@ -172,7 +186,14 @@ def __parseDates(country,province,dates,data):
                         deaths = value["Deaths"]
                         active = value["Active"]
                         recovered = value["Recovered"]
-
+                        foundfromapi = True
+                        break
+                if(not foundfromapi):
+                    prevdate = fileManager.readJson(f"JSON/Countries/{country}/{province}/{dates[index-1]}/{dates[index-1]}.json")
+                    confirmed = prevdate["confirmed"]
+                    deaths = prevdate["deaths"]
+                    active = prevdate["active"]
+                    recovered = prevdate["recovered"]
 
                 tempdict = {"confirmed":confirmed,"deaths":deaths,"recovered":recovered,"active":active}
                 fileManager.writeJson(path,tempdict)
@@ -183,6 +204,7 @@ def __parseDates(country,province,dates,data):
 
         #Rewrite the json file
         fileManager.writeList(datesjsonpath,"dates",dateslist)
+        index += 1
 
 #Returns a dictionary with Covid-19 Case counts
 def getCases(slug, attempts=3):
@@ -209,3 +231,4 @@ def getCases(slug, attempts=3):
     if(attempts == 0): return nocases
     #Otherwise try again now that data has been retrieved
     else: return getCases(slug, attempts-1)
+
