@@ -62,20 +62,20 @@ def __parseCountry(country,data,slug):
                 date = datesfile["date"]
                 try:
                     if not init:
-                        newdict = {"date":date,"values":{"confirmed": 0,"deaths": 0,"recovered": 0,"active": 0}}
+                        newdict = {"date":date,"cases":{"confirmed": 0,"deaths": 0,"recovered": 0,"active": 0}}
                         cases.append(newdict)
 
                     #If the directory contains a total count of cases across all provinces
                     #use that information
                     if provincename == "All Provinces":
-                        cases[j]["values"] = province["cases"]
-                        break
+                        cases[j]["cases"] = province["cases"]
+                        continue
                     #Sum up the cases from all the listed provinces
                     # print(province["cases"])
-                    cases[j]["values"]["confirmed"] += datesfile["cases"]["confirmed"]
-                    cases[j]["values"]["deaths"] += datesfile["cases"]["deaths"]
-                    cases[j]["values"]["recovered"] += datesfile["cases"]["recovered"]
-                    cases[j]["values"]["active"] += datesfile["cases"]["active"]
+                    cases[j]["cases"]["confirmed"] += datesfile["cases"]["confirmed"]
+                    cases[j]["cases"]["deaths"] += datesfile["cases"]["deaths"]
+                    cases[j]["cases"]["recovered"] += datesfile["cases"]["recovered"]
+                    cases[j]["cases"]["active"] += datesfile["cases"]["active"]
 
 
                 except KeyError:
@@ -86,7 +86,7 @@ def __parseCountry(country,data,slug):
 
     #Create the json file for the given country
     path = f"JSON/Countries/{country}/{jsonname}.json"
-    newinfodict = {"country":country,"slug":slug,"file":path,"cases":cases}
+    newinfodict = {"country":country,"slug":slug,"file":path,"dates":cases}
 
     if(index < len(countrieslist)): countrieslist[index] = newinfodict
     else: countrieslist.append(newinfodict)
@@ -194,7 +194,7 @@ def getCases(slug, attempts=3):
     #Searches through the countries json file to pick the appropriate country's case numbers
     if(fileManager.exists("JSON/countries.json")):
         countries = fileManager.readJson("JSON/countries.json")
-        cases = [country["cases"][len(country["cases"])-1]["values"] for country in countries["countries"] if country["slug"] == slug]
+        cases = [country["dates"][len(country["dates"])-1]["cases"] for country in countries["countries"] if country["slug"] == slug]
         #Provided the country exists in the database the country's case counts will be returned
         if cases != []: return cases[0]
 
