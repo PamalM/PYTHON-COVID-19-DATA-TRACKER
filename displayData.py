@@ -7,6 +7,7 @@ from tkinter import *
 
 from PIL import Image, ImageTk
 import APIInterpreter as interpreter
+import matplotlib.pyplot as plt
 
 def display(countryCode):
 
@@ -17,10 +18,11 @@ def display(countryCode):
 
     # Grab the respective stats from the dictionary that are of interest to us.
     # Store them into variables, they will be displayed in the tkinter window.
-    global confirmed, deaths, recovered
+    global confirmed, deaths, recovered, active
     confirmed = displayValues['confirmed']
     deaths = displayValues['deaths']
     recovered = displayValues['recovered']
+    active = displayValues['active']
 
     #Dictionary to convert countrySlug values into pretty string format.
     convCountryName = {'united-states': "U.S.A",
@@ -84,12 +86,24 @@ def display(countryCode):
 
         frame4.pack(fill='x', padx=30, pady=5)
 
+        #Button directs user to the matplotlib graph trend.
+        graphButton = Button(master, text="Display Graph", height=2, fg="slate blue", font=("Courier", 20, "bold"),
+                            highlightbackground='pink', command=display_Graph)
+        graphButton.pack(fill='x', padx=30, pady=10)
+
         # Window's attributes.
         master.resizable(False, False)
         master.configure(background="ivory2")
         master.geometry("600x600")
         master.title(convCountryName.get(countryCode) + " COVID-19 STATISTICS")
         master.mainloop()
+
+
+    #Method displays the graph trend for the specific country.
+    def display_Graph():
+
+        plt.plot([1,2,3,4,5], [1,2,3,4,5])
+        plt.show()
 
     display_GUI()
 
