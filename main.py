@@ -21,7 +21,7 @@ def selection_GUI():
         return country.get()
 
     def nextGUI():
-        # Pass the country Slug to the displayData.py's display(countrySlug) method to initiate the display of data.
+        # P)ass the country Slug to the displayData.py's display(countrySlug) method to initiate the display of data.
         displayData.display(country.get())
 
     # Create tkinter window object.

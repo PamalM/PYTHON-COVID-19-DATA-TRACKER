@@ -102,11 +102,38 @@ def display(countryCode):
     #Method displays the graph trend for the specific country.
     def display_Graph():
 
-        plt.plot([1,2,3,4,5], [1,2,3,4,5])
+        # Return the data for the specific country from April 13th - Present.
+        data = interpreter.getCasesList(countryCode)
+
+        # List to hold all the dates from April 13th-Present.
+        dates = []
+
+        # List to hold all the death count from the dates from April 13th-Present.
+        deathCount = []
+
+        #List to hold all the confirmed cases count from the dates from April 13-Present.
+        confirmedCount = []
+
+        #List to hold all the recovered cases count from the dates from April 13th-Present.
+        recoveredCount = []
+
+        # List to hold all the active cases count from the dates from April 13th-Present.
+        activeCount = []
+
+        for item in data:
+            dates.append(item['date'])
+            deathCount.append(item['cases']['deaths'])
+            confirmedCount.append(item['cases']['confirmed'])
+            recoveredCount.append(item['cases']['recovered'])
+            activeCount.append(item['cases']['active'])
+
+
+        for index in dates, deathCount, confirmedCount, recoveredCount, activeCount:
+            print(index)
+
+
+        plt.plot(dates, deathCount)
         plt.show()
 
+
     display_GUI()
-
-
-#display('canada')
-

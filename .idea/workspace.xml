@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="52be5131-cd8f-48f6-b35d-fb0786034c78" name="Default Changelist" comment="- Added GUI that showcases the stats for each individual country. &#10;- Shows confirmed, recovered, death count for each country. &#10;- TODO: Add button to open Matplotlib graph window. &#10;- TODO: Add additional feature buttons. (News, Vaccine updates, etc. )">
+    <list default="true" id="52be5131-cd8f-48f6-b35d-fb0786034c78" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIInterpreter.py" beforeDir="false" afterPath="$PROJECT_DIR$/APIInterpreter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/displayData.py" beforeDir="false" afterPath="$PROJECT_DIR$/displayData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,11 +15,12 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
-        <option value="pamal" />
         <option value="Pamal Mangat &lt;pamal13mangat@gmail.com&gt;" />
+        <option value="pamal" />
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="ProjectId" id="1bVPLKet6wwz9CxpfKRMdXv6z06" />
   <component name="ProjectLevelVcsManager">
@@ -55,6 +58,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="displayData" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PYTHON-COVID-19-DATA-TRACKER" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/displayData.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PYTHON-COVID-19-DATA-TRACKER" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -79,10 +103,12 @@
     <list>
       <item itemvalue="Python.Unnamed" />
       <item itemvalue="Python.main" />
+      <item itemvalue="Python.displayData" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.displayData" />
       </list>
     </recent_temporary>
   </component>
@@ -104,60 +130,72 @@
       <option name="project" value="LOCAL" />
       <updated>1588809014344</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="- Added [Display Graph] button to displayData.py&#10;- Button opens up a matplotlib window to show the graph containing the data for the trend of #confirmed, deaths, recovered cases over the course of the past month.">
+      <created>1589053007640</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1589053007640</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="- Added GUI that showcases the stats for each individual country. &#10;- Shows confirmed, recovered, death count for each country. &#10;- TODO: Add button to open Matplotlib graph window. &#10;- TODO: Add additional feature buttons. (News, Vaccine updates, etc. )" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Added GUI that showcases the stats for each individual country. &#10;- Shows confirmed, recovered, death count for each country. &#10;- TODO: Add button to open Matplotlib graph window. &#10;- TODO: Add additional feature buttons. (News, Vaccine updates, etc. )" />
+    <MESSAGE value="- Added [Display Graph] button to displayData.py&#10;- Button opens up a matplotlib window to show the graph containing the data for the trend of #confirmed, deaths, recovered cases over the course of the past month." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Added [Display Graph] button to displayData.py&#10;- Button opens up a matplotlib window to show the graph containing the data for the trend of #confirmed, deaths, recovered cases over the course of the past month." />
   </component>
   <component name="WindowStateProjectService">
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588714374641">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1588714374641" />
-    <state x="302" y="51" key="CommitChangelistDialog2" timestamp="1588809110202">
+    <state x="302" y="51" key="CommitChangelistDialog2" timestamp="1589053007374">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="302" y="51" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1588809110202" />
-    <state width="1419" height="245" key="GridCell.Tab.0.bottom" timestamp="1589052880085">
+    <state x="302" y="51" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1589053007374" />
+    <state width="1419" height="302" key="GridCell.Tab.0.bottom" timestamp="1589129188517">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1589052880085" />
+    <state width="1419" height="302" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1589129188517" />
     <state width="1419" height="245" key="GridCell.Tab.0.bottom/0.23.1440.805@0.23.1440.805" timestamp="1588808686164" />
-    <state width="1419" height="245" key="GridCell.Tab.0.center" timestamp="1589052880084">
+    <state width="1419" height="302" key="GridCell.Tab.0.center" timestamp="1589129188516">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1589052880084" />
+    <state width="1419" height="302" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1589129188516" />
     <state width="1419" height="245" key="GridCell.Tab.0.center/0.23.1440.805@0.23.1440.805" timestamp="1588808686163" />
-    <state width="1419" height="245" key="GridCell.Tab.0.left" timestamp="1589052880084">
+    <state width="1419" height="302" key="GridCell.Tab.0.left" timestamp="1589129188515">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1589052880084" />
+    <state width="1419" height="302" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1589129188515" />
     <state width="1419" height="245" key="GridCell.Tab.0.left/0.23.1440.805@0.23.1440.805" timestamp="1588808686162" />
-    <state width="1419" height="245" key="GridCell.Tab.0.right" timestamp="1589052880085">
+    <state width="1419" height="302" key="GridCell.Tab.0.right" timestamp="1589129188516">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1589052880085" />
+    <state width="1419" height="302" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1589129188516" />
     <state width="1419" height="245" key="GridCell.Tab.0.right/0.23.1440.805@0.23.1440.805" timestamp="1588808686163" />
     <state x="221" y="89" key="SettingsEditor" timestamp="1588809133046">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1588809133046" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1588809020720">
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1589129351328">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1588809020720" />
-    <state x="397" y="290" key="com.intellij.ide.util.TipDialog" timestamp="1589051784134">
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1589129351328" />
+    <state x="397" y="290" key="com.intellij.ide.util.TipDialog" timestamp="1589079666607">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="397" y="290" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1589051784134" />
+    <state x="397" y="290" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1589079666607" />
     <state x="397" y="282" key="com.intellij.ide.util.TipDialog/0.23.1440.805@0.23.1440.805" timestamp="1588714258608" />
-    <state x="330" y="248" key="git4idea.merge.GitPullDialog" timestamp="1589051793969">
+    <state x="503" y="374" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589080895764">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="330" y="248" key="git4idea.merge.GitPullDialog/0.0.1440.900@0.0.1440.900" timestamp="1589051793969" />
+    <state x="503" y="374" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1440.900@0.0.1440.900" timestamp="1589080895764" />
+    <state x="330" y="248" key="git4idea.merge.GitPullDialog" timestamp="1589080973749">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="330" y="248" key="git4idea.merge.GitPullDialog/0.0.1440.900@0.0.1440.900" timestamp="1589080973749" />
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1588802546498">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
