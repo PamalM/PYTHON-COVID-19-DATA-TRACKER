@@ -9,7 +9,11 @@ import APIInterpreter as interpreter
 import matplotlib.pyplot as plt
 from matplotlib import style
 
-import numpy as np
+# Not the ideal solution, but we are going to be ignoring any warnings the compiler gives during runtime.
+# We kept receiving a warning for axis in matplotlib, but it was just a suggestion from the compiler, not an error.
+# However, to eliminate the cluster in the compiler, we have chosen just to supress all warnings that may arise. 
+import warnings
+warnings.filterwarnings("ignore")
 
 def display(countryCode):
 
@@ -144,7 +148,7 @@ def display(countryCode):
         # List containing the dates in the format we want them in to show on the graph.
         formatedDates = []
         for date in dates:
-            print(formatedDates.append(monthConv.get(int(date[5:7])) + "/" + date[8:10] + "\n" + date[0:4]))
+            formatedDates.append(monthConv.get(int(date[5:7])) + "/" + date[8:10] + "\n" + date[0:4])
 
         # Plot lists onto graph.
         plt.plot(formatedDates, confirmedCount, label='Confirmed Cases', color='b', marker='.')
@@ -170,7 +174,4 @@ def display(countryCode):
         fig.canvas.set_window_title('COVID-19 TRACKER')
         plt.show()
 
-
     display_GUI()
-
-display('canada')

@@ -35,7 +35,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
-  <component name="RunManager" selected="Python.displayData">
+  <component name="RunManager" selected="Python.main">
     <configuration name="Unnamed" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="PYTHON-COVID-19-DATA-TRACKER" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -106,8 +106,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.displayData" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.displayData" />
       </list>
     </recent_temporary>
   </component>
@@ -143,52 +143,60 @@
       <option name="project" value="LOCAL" />
       <updated>1589129366799</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="- Completed the Matplotlib graph plot.&#10;- Graph successfuly displays the trend of case #s, plotted against the dates.&#10;- Formatting of the graph was done to allow for more space between x axis labels&#10;- Graph displays 4 subplots within one graph (confirmed, deaths, recoveries, active cases)&#10;- Added title, style, labels to graph to make it look more presentable. &#10;- The date was formated and tweaked within the displayData.py, but the format of the date will remain the same in other functions.">
+      <created>1589177561574</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1589177561575</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="- Added GUI that showcases the stats for each individual country. &#10;- Shows confirmed, recovered, death count for each country. &#10;- TODO: Add button to open Matplotlib graph window. &#10;- TODO: Add additional feature buttons. (News, Vaccine updates, etc. )" />
     <MESSAGE value="- Added [Display Graph] button to displayData.py&#10;- Button opens up a matplotlib window to show the graph containing the data for the trend of #confirmed, deaths, recovered cases over the course of the past month." />
-    <option name="LAST_COMMIT_MESSAGE" value="- Added [Display Graph] button to displayData.py&#10;- Button opens up a matplotlib window to show the graph containing the data for the trend of #confirmed, deaths, recovered cases over the course of the past month." />
+    <MESSAGE value="- Completed the Matplotlib graph plot.&#10;- Graph successfuly displays the trend of case #s, plotted against the dates.&#10;- Formatting of the graph was done to allow for more space between x axis labels&#10;- Graph displays 4 subplots within one graph (confirmed, deaths, recoveries, active cases)&#10;- Added title, style, labels to graph to make it look more presentable. &#10;- The date was formated and tweaked within the displayData.py, but the format of the date will remain the same in other functions." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Completed the Matplotlib graph plot.&#10;- Graph successfuly displays the trend of case #s, plotted against the dates.&#10;- Formatting of the graph was done to allow for more space between x axis labels&#10;- Graph displays 4 subplots within one graph (confirmed, deaths, recoveries, active cases)&#10;- Added title, style, labels to graph to make it look more presentable. &#10;- The date was formated and tweaked within the displayData.py, but the format of the date will remain the same in other functions." />
   </component>
   <component name="WindowStateProjectService">
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588714374641">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1588714374641" />
-    <state x="0" y="51" key="CommitChangelistDialog2" timestamp="1589129366354">
+    <state x="0" y="51" key="CommitChangelistDialog2" timestamp="1589177561186">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="0" y="51" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1589129366354" />
-    <state width="1419" height="302" key="GridCell.Tab.0.bottom" timestamp="1589177450445">
+    <state x="0" y="51" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1589177561186" />
+    <state width="1419" height="302" key="GridCell.Tab.0.bottom" timestamp="1589177993773">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="302" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1589177450445" />
+    <state width="1419" height="302" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1589177993773" />
     <state width="1419" height="245" key="GridCell.Tab.0.bottom/0.23.1440.805@0.23.1440.805" timestamp="1588808686164" />
-    <state width="1419" height="302" key="GridCell.Tab.0.center" timestamp="1589177450444">
+    <state width="1419" height="302" key="GridCell.Tab.0.center" timestamp="1589177993772">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="302" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1589177450444" />
+    <state width="1419" height="302" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1589177993772" />
     <state width="1419" height="245" key="GridCell.Tab.0.center/0.23.1440.805@0.23.1440.805" timestamp="1588808686163" />
-    <state width="1419" height="302" key="GridCell.Tab.0.left" timestamp="1589177450443">
+    <state width="1419" height="302" key="GridCell.Tab.0.left" timestamp="1589177993772">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="302" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1589177450443" />
+    <state width="1419" height="302" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1589177993772" />
     <state width="1419" height="245" key="GridCell.Tab.0.left/0.23.1440.805@0.23.1440.805" timestamp="1588808686162" />
-    <state width="1419" height="302" key="GridCell.Tab.0.right" timestamp="1589177450444">
+    <state width="1419" height="302" key="GridCell.Tab.0.right" timestamp="1589177993773">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="302" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1589177450444" />
+    <state width="1419" height="302" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1589177993773" />
     <state width="1419" height="245" key="GridCell.Tab.0.right/0.23.1440.805@0.23.1440.805" timestamp="1588808686163" />
     <state x="221" y="89" key="SettingsEditor" timestamp="1588809133046">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1588809133046" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1589129374151">
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1589177567194">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1589129374151" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1589177567194" />
     <state x="397" y="290" key="com.intellij.ide.util.TipDialog" timestamp="1589153262069">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
