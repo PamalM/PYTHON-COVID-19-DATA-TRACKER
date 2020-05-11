@@ -72,7 +72,7 @@ def __parseCountry(country,data,slug):
                     #If the directory contains a total count of cases across all provinces
                     #use that information
                     if provincename == "All Provinces":
-                        cases[j]["cases"] = province["cases"]
+                        cases[j]["cases"] = datesfile["cases"]
                         continue
                     #Sum up the cases from all the listed provinces
                     # print(province["cases"])
