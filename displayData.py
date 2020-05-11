@@ -4,10 +4,12 @@
 # The statistics will be displayed, and stored in a JSON folder locally for the user to access if they wish.
 
 from tkinter import *
-
 from PIL import Image, ImageTk
 import APIInterpreter as interpreter
 import matplotlib.pyplot as plt
+from matplotlib import style
+
+import numpy as np
 
 def display(countryCode):
 
@@ -95,7 +97,7 @@ def display(countryCode):
         master.resizable(False, False)
         master.configure(background="ivory2")
         master.geometry("600x600")
-        master.title(convCountryName.get(countryCode) + " COVID-19 STATISTICS")
+        master.title(convCountryName.get(countryCode) + " | COVID-19 TRACKER")
         master.mainloop()
 
 
@@ -105,21 +107,25 @@ def display(countryCode):
         # Return the data for the specific country from April 13th - Present.
         data = interpreter.getCasesList(countryCode)
 
+        # Theme for the plot.
+        style.use('bmh')
+
         # List to hold all the dates from April 13th-Present.
         dates = []
 
         # List to hold all the death count from the dates from April 13th-Present.
         deathCount = []
 
-        #List to hold all the confirmed cases count from the dates from April 13-Present.
+        # List to hold all the confirmed cases count from the dates from April 13-Present.
         confirmedCount = []
 
-        #List to hold all the recovered cases count from the dates from April 13th-Present.
+        # List to hold all the recovered cases count from the dates from April 13th-Present.
         recoveredCount = []
 
         # List to hold all the active cases count from the dates from April 13th-Present.
         activeCount = []
 
+        # Iterate through the fetched data, and populate the individual lists.
         for item in data:
             dates.append(item['date'])
             deathCount.append(item['cases']['deaths'])
@@ -127,13 +133,44 @@ def display(countryCode):
             recoveredCount.append(item['cases']['recovered'])
             activeCount.append(item['cases']['active'])
 
+        # Dictionary used to convert date format from yyyy-mm-dd, month/dd.
+        monthConv = {1: 'Jan', 2: 'Feb',
+                     3: 'Mar', 4: 'Apr',
+                     5: 'May', 6: 'Jun',
+                     7: 'Jul', 8: 'Aug',
+                     9: 'Sep', 10: 'Oct',
+                     11: 'Nov', 12: 'Dec'}
 
-        for index in dates, deathCount, confirmedCount, recoveredCount, activeCount:
-            print(index)
+        # List containing the dates in the format we want them in to show on the graph.
+        formatedDates = []
+        for date in dates:
+            print(formatedDates.append(monthConv.get(int(date[5:7])) + "/" + date[8:10] + "\n" + date[0:4]))
 
+        # Plot lists onto graph.
+        plt.plot(formatedDates, confirmedCount, label='Confirmed Cases', color='b', marker='.')
+        plt.plot(formatedDates, recoveredCount, label='Recoveries', color='g', marker='.')
+        plt.plot(formatedDates, activeCount, label='Active Cases', color='k', marker='.')
+        plt.plot(formatedDates, deathCount, label='DeathS', color='r', marker='X')
 
-        plt.plot(dates, deathCount)
+        ax = plt.axes()
+
+        # Display the x,y title labels for the graph.
+        plt.xlabel('Dates')
+        plt.ylabel('#Cases')
+        plt.title('COVID-19 TREND')
+        plt.legend()
+
+        #Sets the spacing for the xlabel ticks. (To prevent overlapping of xlabels on graph. )
+        ax.xaxis.set_major_locator(plt.MultipleLocator(5))
+
+        #plt.xticks(rotation=20)
+
+        # Change title for figure window.
+        fig = plt.gcf()
+        fig.canvas.set_window_title('COVID-19 TRACKER')
         plt.show()
 
 
     display_GUI()
+
+display('canada')
