@@ -245,7 +245,7 @@ def getCasesList(slug, attempts=3, startdate="2020-04-13", enddate=str(datetime.
         currentdate = mindate
 
     while str(currentdate)[0:10] != str(lastdate)[0:10]:
-        caselist.append({"date":str(currentdate)[0:10],"cases":getCases(slug, 3, str(currentdate)[0:10])})
+        caselist.append({"date":str(currentdate)[0:10], "cases":getCases(slug, 3, str(currentdate)[0:10])})
         currentdate += timedelta(days=1)
 
     return caselist
