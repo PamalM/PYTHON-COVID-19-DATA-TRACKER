@@ -164,5 +164,3 @@ def display(countryCode):
         plt.show()
 
     display_GUI()
-
-display('canada')
