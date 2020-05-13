@@ -87,7 +87,7 @@ def selection_GUI():
 
     # Draw Next Button; Button directs user to the next GUI upon valid selection.
     nextButton = tk.Button(root, text="Next", width=10, height=2, fg="slate blue", font=("Courier", 20, "bold"),
-                           highlightbackground='pink', state=tk.DISABLED, command=displayData.display(country.get()))
+                           highlightbackground='pink', state=tk.DISABLED, command=lambda:displayData.display(country.get()))
 
     # Draw the frame containing the list of countries.
     # Provided proper padding, and equal column distribution to ensure equal spacing.
