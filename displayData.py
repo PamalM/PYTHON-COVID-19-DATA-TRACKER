@@ -26,10 +26,10 @@ def display(countryCode):
     # Grab the respective stats from the dictionary that are of interest to us.
     # Store them into variables, they will be displayed in the tkinter window.
     global confirmed, deaths, recovered, active
-    confirmed = displayValues['confirmed']
-    deaths = displayValues['deaths']
-    recovered = displayValues['recovered']
-    active = displayValues['active']
+    confirmed = displayValues['Confirmed']
+    deaths = displayValues['Deaths']
+    recovered = displayValues['Recovered']
+    active = displayValues['Active']
 
     # Minor formatting to the country names when displaying in title of GUI.
     convCountryName = {'united-states': "U.S.A",
@@ -123,10 +123,10 @@ def display(countryCode):
         # Iterate through the fetched data, and populate the individual lists.
         for item in data:
             dates.append(item['date'])
-            deathCount.append(item['cases']['deaths'])
-            confirmedCount.append(item['cases']['confirmed'])
-            recoveredCount.append(item['cases']['recovered'])
-            activeCount.append(item['cases']['active'])
+            deathCount.append(item['cases']['Deaths'])
+            confirmedCount.append(item['cases']['Confirmed'])
+            recoveredCount.append(item['cases']['Recovered'])
+            activeCount.append(item['cases']['Active'])
 
         # Dictionary used to convert date format from yyyy-mm-dd, month/dd.
         monthConv = {1: 'Jan', 2: 'Feb',
@@ -145,7 +145,7 @@ def display(countryCode):
         plt.plot(formatedDates, confirmedCount, label='Confirmed Cases', color='b', marker='.')
         plt.plot(formatedDates, recoveredCount, label='Recoveries', color='g', marker='.')
         plt.plot(formatedDates, activeCount, label='Active Cases', color='k', marker='.')
-        plt.plot(formatedDates, deathCount, label='DeathS', color='r', marker='X')
+        plt.plot(formatedDates, deathCount, label='Deaths', color='r', marker='X')
 
         ax = plt.axes()
 

@@ -3,24 +3,64 @@ import requests
 from datetime import datetime, timedelta
 import fileManager
 
-def __blankCaseDict()
-    return {"confirmed": 0,"deaths": 0,"recovered": 0,"active": 0}
+#Path for countries.json
+countriesjsonpath = "JSON/countries.json"
 
-    #Converts string format YYYY-MM-DD to a datetime object
+#region Helper Methods
+#Template for an empty case dictionary
+def __blankCaseDict():
+    return {"Confirmed": 0,"Deaths": 0,"Recovered": 0,"Active": 0}
+
+#Converts string format YYYY-MM-DD to a datetime object
 def __convertStringDatetime(string):
     append = f'{string} 00:00:00.000000'
     return datetime.strptime(append,'%Y-%m-%d %H:%M:%S.%f')
 
+#Finds the index of an object within a given list
 def __indexOfValueInList(string, searchobject, searchlist):
     index = 0
     for val in searchlist:
         if val[string] == searchobject: break
         else: index += 1
-
     return index
 
+#Assigns all case parameters from a given dictionary to a blank case dictionary and returns it
+def __assignCases(value):
+    cases = __blankCaseDict()
+    cases["Confirmed"] = value["Confirmed"]
+    cases["Deaths"] = value["Deaths"]
+    cases["Recovered"] = value["Recovered"]
+    cases["Active"] = value["Active"]
+    return cases
+
+#Converts string to proper json file naming convention (lowercase, spaces replaced with '-')
+def __jsonnameConversion(string):
+    return string.lower().replace(" ","-")
+
+def __getCountryDir(country):
+    return f"JSON/Countries/{country}"
+
+def __getCountryJson(country):
+    jsonname = __jsonnameConversion(country)
+    return f"{__getCountryDir(country)}/{jsonname}.json"
+
+def __getProvinceDir(country, province):
+    return f"{__getCountryDir(country)}/{province}"
+
+def __getProvinceJson(country, province):
+    jsonname = __jsonnameConversion(province)
+    return f"{__getProvinceDir(country, province)}/{jsonname}.json"
+
+def __getDateDir(country, province, date):
+    return f"{__getProvinceDir(country, province)}/{date}"
+
+def __getDateJson(country, province, date):
+    return f"{__getDateDir(country, province, date)}/{date}.json"
+#endregion Helper Methods
+
+#region Parsing Methods
 #Reformats the returned json and organizes information into subdirectories
-def parseJson(data, slug):
+def __parseJson(data, slug):
     #Get country name
     country = data[0]["Country"]
 
@@ -35,21 +75,21 @@ def parseJson(data, slug):
         if(tempdate < earliestdate):
             earliestdate = tempdate
 
+    #Creates a list of all dates from the earliest date to today
     dates = []
     while str(earliestdate)[0:10] != str(datetime.today()+timedelta(days=1))[0:10]:
         dates.append(str(earliestdate)[0:10])
         earliestdate += timedelta(days=1)
 
-    #Get list of dates for each province
+    #Get list of dates for each province and parse the dates
     for province in provinces:
         __parseDates(country, province, dates, data)
 
+    #parse the country and provinces
     __parseProvinces(country, provinces, data)
     __parseCountry(country, data, slug)
 
 def __parseCountry(country,data,slug):
-    countriesjsonpath = "JSON/countries.json"
-
     #Check if countries json file exists, if not, create it
     fileManager.jsonPreset(countriesjsonpath,"countries")
 
@@ -57,26 +97,31 @@ def __parseCountry(country,data,slug):
     countrieslist = fileManager.readList(countriesjsonpath,"countries")
     index = __indexOfValueInList("country", country, countrieslist)
 
-    jsonname = country.lower().replace(" ","-")
+    #Get the number of country directories that ar in the Countries folder
+    provincecount = fileManager.directoryCount(__getCountryDir(country))
 
-    #Get the most recent number of cases
-    dirpath = f"JSON/Countries/{country}"
-    cases = []
-    provincecount = fileManager.directoryCount(dirpath)
     #Get the total count of case values across all provinces
+    cases = []
+    #Used to only create a new dictionary for each country and append it to the cases list once
     init = False
     for i in range(provincecount):
         try:
-            province = fileManager.readJson(f"{dirpath}/{jsonname}.json")["provinces"][i]
+            #Retrieve province info
+            province = fileManager.readJson(__getCountryJson(country))["provinces"][i]
             provincename = province["province"]
-            provincejsonname = provincename.lower().replace(" ","-")
 
-            datecount = fileManager.directoryCount(f"{dirpath}/{provincename}")
+            #Get the number of date directories in the current provinces directory
+            datecount = fileManager.directoryCount(__getProvinceDir(country, provincename))
 
             for j in range(datecount):
-                datesfile = fileManager.readJson(f"{dirpath}/{provincename}/{provincejsonname}.json")["dates"][j]
+
+                #Retrieve date info
+                datesfile = fileManager.readJson(__getProvinceJson(country, provincename))["dates"][j]
                 date = datesfile["date"]
+
+                #Attempt to add the current provinces case counts for each date to the cases list
                 try:
+                    #If the cases dictionaries haven't been created yet, create and append them
                     if not init:
                         newdict = {"date":date,"cases":__blankCaseDict()}
                         cases.append(newdict)
@@ -88,20 +133,21 @@ def __parseCountry(country,data,slug):
                         continue
                     #Sum up the cases from all the listed provinces
                     # print(province["cases"])
-                    cases[j]["cases"]["confirmed"] += datesfile["cases"]["confirmed"]
-                    cases[j]["cases"]["deaths"] += datesfile["cases"]["deaths"]
-                    cases[j]["cases"]["recovered"] += datesfile["cases"]["recovered"]
-                    cases[j]["cases"]["active"] += datesfile["cases"]["active"]
-
+                    cases[j]["cases"]["Confirmed"] += datesfile["cases"]["Confirmed"]
+                    cases[j]["cases"]["Deaths"] += datesfile["cases"]["Deaths"]
+                    cases[j]["cases"]["Recovered"] += datesfile["cases"]["Recovered"]
+                    cases[j]["cases"]["Active"] += datesfile["cases"]["Active"]
 
                 except KeyError:
                     continue
+
             init = True
+
         except IndexError:
             continue
 
     #Create the json file for the given country
-    path = f"JSON/Countries/{country}/{jsonname}.json"
+    path = __getCountryJson(country)
     newinfodict = {"country":country,"slug":slug,"file":path,"dates":cases}
 
     if(index < len(countrieslist)): countrieslist[index] = newinfodict
@@ -114,97 +160,103 @@ def __parseProvinces(country,provinces,data):
     for province in provinces:
         if province == "": province = "All Provinces"
 
-        jsonname = country.lower().replace(" ","-")
-        provincesjsonpath = f"JSON/Countries/{country}/{jsonname}.json"
+        #Get the country's json path
+        countryjsonpath = __getCountryJson(country)
 
         #Check if provinces json file exists, if not, create it
-        fileManager.jsonPreset(provincesjsonpath,"provinces")
+        fileManager.jsonPreset(countryjsonpath,"provinces")
 
         #Get index of province in json array
-        provinceslist = fileManager.readList(provincesjsonpath,"provinces")
+        provinceslist = fileManager.readList(countryjsonpath,"provinces")
         index = __indexOfValueInList("province", province, provinceslist)
 
         #Get the most recent number of cases
-        dirpath = f"JSON/Countries/{country}/{province}"
+        provincedir = __getProvinceDir(country, province)
         cases = __blankCaseDict()
-        datecount = fileManager.directoryCount(dirpath)
+        datecount = fileManager.directoryCount(provincedir)
 
+        #Update the province's cases dict to the most recent dates values
         for i in range(datecount):
             currDate = str(datetime.today() - timedelta(days=i))[0:10]
-            datepath = f"{dirpath}/{currDate}/{currDate}.json"
+            datepath = f"{provincedir}/{currDate}/{currDate}.json"
             if fileManager.exists(datepath):
                 recent = fileManager.readJson(datepath)
                 cases = recent
                 break
 
-        jsonname = province.lower().replace(" ","-")
-        filepath = f"JSON/Countries/{country}/{province}/{jsonname}.json"
-        newinfodict = {"province":province,"file":filepath,"cases":cases}
+        #Get the province's json path
+        provincejson = __getProvinceJson(country, province)
+        #Create the province's new information dictionary with the updated case counts
+        newinfodict = {"province":province,"file":provincejson,"cases":cases}
 
+        #Replace the province's old values if it already exists within the list,
+        #otherwise append the new province's information
         if(index < len(provinceslist)): provinceslist[index] = newinfodict
         else: provinceslist.append(newinfodict)
 
-        #Rewrite the json file
-        fileManager.writeList(provincesjsonpath,"provinces",provinceslist)
+        #Rewrite the country's json file
+        fileManager.writeList(countryjsonpath,"provinces",provinceslist)
 
 def __parseDates(country,province,dates,data):
     #Used to check the data file with the original name of province
     checkprovince = province
     if province == "": province = "All Provinces"
 
+    #Keep track of the current position in the dates list to be able to reference the previous date
     index = 0
-
     for date in dates:
         #Check if date's directory exists, if not, create it
-        fileManager.mkexistsdir(f"JSON/Countries/{country}/{province}/{date}")
+        fileManager.mkexistsdir(__getDateDir(country, province, date))
 
-        jsonname = province.lower().replace(" ","-")
-        datesjsonpath = f"JSON/Countries/{country}/{province}/{jsonname}.json"
+        #Get the province's json path
+        provincejson = __getProvinceJson(country, province)
 
         #Check if dates json file exists, if not, create it
-        fileManager.jsonPreset(datesjsonpath,"dates")
+        fileManager.jsonPreset(provincejson,"dates")
 
         #Load existing dates.json file
-        dateslist = fileManager.readList(datesjsonpath,"dates")
+        dateslist = fileManager.readList(provincejson,"dates")
 
-        #Check if the dates list already contains the dates file path
-        iscontained = False
-        for dateinfodict in dateslist:
-            if(dateinfodict["date"] == date): iscontained = True
+        #Get the date's json path
+        path = __getDateJson(country, province, date)
 
-        #If the date isn't contained append the new date's dict to the dates list
-        if not iscontained:
+        #If the date doesn't exist in the directory create it, otherwise skip it as date information
+        #doesn't need to be rewritten
+        if not fileManager.exists(path):
+            #Keep track of whether the date was found in the retrieved API information
+            foundfromapi = False
 
-            path = f"JSON/Countries/{country}/{province}/{date}/{date}.json"
-            if not fileManager.exists(path):
-                foundfromapi = False
-                #Retrive date's statistics
-                cases = __blankCaseDict()
-                for value in data:
-                    if(value["Date"].startswith(date) and value["Province"] == checkprovince):
-                        cases = value
-                        foundfromapi = True
-                        break
-                if(not foundfromapi):
-                    try:
-                        prevdate = fileManager.readJson(f"JSON/Countries/{country}/{province}/{dates[index-1]}/{dates[index-1]}.json")
-                        cases = prevdate
-                    except FileNotFoundError:
-                        pass
+            cases = __blankCaseDict()
+            #Check all the dates listed from the API json
+            for value in data:
+                #If the value of the current date and province matches the API data assign the case counts
+                if(value["Date"].startswith(date) and value["Province"] == checkprovince):
+                    cases = __assignCases(value)
+                    foundfromapi = True
+                    break
+            #If the case info couldn't be found in the API json, use the previous dates values instead
+            if(not foundfromapi):
+                try:
+                    #Get the previous date json
+                    prevdate = fileManager.readJson(__getDateJson(country, province, dates[index-1]))
+                    cases = __assignCases(prevdate)
+                except FileNotFoundError:
+                    pass
 
-                tempdict = {"confirmed":confirmed,"deaths":deaths,"recovered":recovered,"active":active}
-                fileManager.writeJson(path,tempdict)
+            #Write the case information to the date's json file
+            fileManager.writeJson(path,cases)
 
-                newinfodict = {"date":date,"file":path,"cases":tempdict}
+            #Create the new date's information dictionary and append it to the list of dates
+            newinfodict = {"date":date,"file":path,"cases":cases}
+            dateslist.append(newinfodict)
 
-                dateslist.append(newinfodict)
-
-        #Rewrite the json file
-        fileManager.writeList(datesjsonpath,"dates",dateslist)
+        #Rewrite the province's json file
+        fileManager.writeList(provincejson,"dates",dateslist)
         index += 1
 
+#endregion Parsing Methods
 
-
+#region Data Retrival Methods
 #Returns a dictionary with Covid-19 Case counts
 def getCases(slug, attempts=3, date=str(datetime.today())[0:10]):
 
@@ -213,8 +265,8 @@ def getCases(slug, attempts=3, date=str(datetime.today())[0:10]):
 
     try:
         #Searches through the countries json file to pick the appropriate country's case numbers
-        if(fileManager.exists("JSON/countries.json")):
-            countries = fileManager.readJson("JSON/countries.json")
+        if(fileManager.exists(countriesjsonpath)):
+            countries = fileManager.readJson(countriesjsonpath)
             targetcountry = [country for country in countries["countries"] if country["slug"] == slug]
             for i in range(len(targetcountry[0]["dates"])):
                 cases = [country["dates"][i]["cases"] for country in countries["countries"] if country["slug"] == slug and country["dates"][i]["date"] == date]
@@ -228,7 +280,7 @@ def getCases(slug, attempts=3, date=str(datetime.today())[0:10]):
     #Fetch most recent data from Covid19 API and update the JSON directory
     print("Fetching data from API...")
     response = requests.get("https://api.covid19api.com/live/country/" + slug)
-    parseJson(response.json(), slug)
+    __parseJson(response.json(), slug)
 
     #Could not find data after x attempts, returns an invalid case dictionary
     if(attempts == 0): return nocases
@@ -241,7 +293,7 @@ def getCasesList(slug, attempts=3, startdate="2020-04-13", enddate=str(datetime.
     mindate = __convertStringDatetime("2020-04-13")
 
     currentdate = __convertStringDatetime(startdate)
-    lastdate = __convertStringDatetime(lastdate)
+    lastdate = __convertStringDatetime(enddate)
 
     if currentdate < mindate:
         currentdate = mindate
@@ -251,3 +303,4 @@ def getCasesList(slug, attempts=3, startdate="2020-04-13", enddate=str(datetime.
         currentdate += timedelta(days=1)
 
     return caselist
+#endregion Data Retrieval Methods
