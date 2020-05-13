@@ -3,6 +3,22 @@ import requests
 from datetime import datetime, timedelta
 import fileManager
 
+def __blankCaseDict()
+    return {"confirmed": 0,"deaths": 0,"recovered": 0,"active": 0}
+
+    #Converts string format YYYY-MM-DD to a datetime object
+def __convertStringDatetime(string):
+    append = f'{string} 00:00:00.000000'
+    return datetime.strptime(append,'%Y-%m-%d %H:%M:%S.%f')
+
+def __indexOfValueInList(string, searchobject, searchlist):
+    index = 0
+    for val in searchlist:
+        if val[string] == searchobject: break
+        else: index += 1
+
+    return index
+
 #Reformats the returned json and organizes information into subdirectories
 def parseJson(data, slug):
     #Get country name
@@ -15,8 +31,7 @@ def parseJson(data, slug):
     #Find the earliest date listed
     earliestdate = datetime.today()
     for value in data:
-        string = f'{value["Date"][0:10]} 00:00:00.000000'
-        tempdate = datetime.strptime(string,'%Y-%m-%d %H:%M:%S.%f')
+        tempdate = __convertStringDatetime(value["Date"][0:10])
         if(tempdate < earliestdate):
             earliestdate = tempdate
 
@@ -40,10 +55,7 @@ def __parseCountry(country,data,slug):
 
     #Get index of country in json array
     countrieslist = fileManager.readList(countriesjsonpath,"countries")
-    index = 0
-    for p in countrieslist:
-        if p["country"] == country: break
-        else: index += 1
+    index = __indexOfValueInList("country", country, countrieslist)
 
     jsonname = country.lower().replace(" ","-")
 
@@ -66,7 +78,7 @@ def __parseCountry(country,data,slug):
                 date = datesfile["date"]
                 try:
                     if not init:
-                        newdict = {"date":date,"cases":{"confirmed": 0,"deaths": 0,"recovered": 0,"active": 0}}
+                        newdict = {"date":date,"cases":__blankCaseDict()}
                         cases.append(newdict)
 
                     #If the directory contains a total count of cases across all provinces
@@ -110,15 +122,13 @@ def __parseProvinces(country,provinces,data):
 
         #Get index of province in json array
         provinceslist = fileManager.readList(provincesjsonpath,"provinces")
-        index = 0
-        for p in provinceslist:
-            if p["province"] == province: break
-            else: index += 1
+        index = __indexOfValueInList("province", province, provinceslist)
 
         #Get the most recent number of cases
         dirpath = f"JSON/Countries/{country}/{province}"
-        cases = {"confirmed":0,"deaths":0,"recovered":0,"active":0}
+        cases = __blankCaseDict()
         datecount = fileManager.directoryCount(dirpath)
+
         for i in range(datecount):
             currDate = str(datetime.today() - timedelta(days=i))[0:10]
             datepath = f"{dirpath}/{currDate}/{currDate}.json"
@@ -164,30 +174,21 @@ def __parseDates(country,province,dates,data):
 
         #If the date isn't contained append the new date's dict to the dates list
         if not iscontained:
-            #Create the json file for the given date
+
             path = f"JSON/Countries/{country}/{province}/{date}/{date}.json"
             if not fileManager.exists(path):
                 foundfromapi = False
                 #Retrive date's statistics
-                confirmed = 0
-                deaths = 0
-                recovered = 0
-                active = 0
+                cases = __blankCaseDict()
                 for value in data:
                     if(value["Date"].startswith(date) and value["Province"] == checkprovince):
-                        confirmed = value["Confirmed"]
-                        deaths = value["Deaths"]
-                        active = value["Active"]
-                        recovered = value["Recovered"]
+                        cases = value
                         foundfromapi = True
                         break
                 if(not foundfromapi):
                     try:
                         prevdate = fileManager.readJson(f"JSON/Countries/{country}/{province}/{dates[index-1]}/{dates[index-1]}.json")
-                        confirmed = prevdate["confirmed"]
-                        deaths = prevdate["deaths"]
-                        active = prevdate["active"]
-                        recovered = prevdate["recovered"]
+                        cases = prevdate
                     except FileNotFoundError:
                         pass
 
@@ -202,11 +203,13 @@ def __parseDates(country,province,dates,data):
         fileManager.writeList(datesjsonpath,"dates",dateslist)
         index += 1
 
+
+
 #Returns a dictionary with Covid-19 Case counts
 def getCases(slug, attempts=3, date=str(datetime.today())[0:10]):
 
     #Default cases count to return if values cannot be found
-    nocases = {"confirmed": -1,"deaths": -1,"recovered": -1,"active": -1}
+    nocases = __blankCaseDict()
 
     try:
         #Searches through the countries json file to pick the appropriate country's case numbers
@@ -234,12 +237,11 @@ def getCases(slug, attempts=3, date=str(datetime.today())[0:10]):
 
 def getCasesList(slug, attempts=3, startdate="2020-04-13", enddate=str(datetime.today())[0:10]):
     caselist = []
-    mindate = datetime.strptime("2020-04-13 00:00:00.000000",'%Y-%m-%d %H:%M:%S.%f')
+    #Earliest date provided by the API
+    mindate = __convertStringDatetime("2020-04-13")
 
-    startdatestring = f'{startdate} 00:00:00.000000'
-    currentdate = datetime.strptime(startdatestring,'%Y-%m-%d %H:%M:%S.%f')
-    enddatestring = f'{enddate} 00:00:00.000000'
-    lastdate = datetime.strptime(enddatestring,'%Y-%m-%d %H:%M:%S.%f')
+    currentdate = __convertStringDatetime(startdate)
+    lastdate = __convertStringDatetime(lastdate)
 
     if currentdate < mindate:
         currentdate = mindate
