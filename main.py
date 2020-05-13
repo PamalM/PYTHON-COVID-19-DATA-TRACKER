@@ -1,98 +1,96 @@
-# Main.py: User must run this file to launch the program. (Base-File)
+# This is the main python file. Run this (.py) to execute the program.
 
 # Tkinter library will be utilized to create the Graphical User Interface (GUI).
-from tkinter import Label, Tk, Canvas, Button, Radiobutton, StringVar, DISABLED, NORMAL, CENTER, Frame, W, E, N, S
+import tkinter as tk
 
-# PIL library handles the image processing in this applciation.
+# PIL library will be utilized for image processing within the GUI.
 from PIL import Image, ImageTk
 
-# Import displayData.py.
-# User makes selection in this (.py) for specific country or worldwide data, which is passed onto displayData to display statistics.
+# After selection is made in main.py, the selection is passed to displayData.py
 import displayData
 
-# Method will create and present the user with the selection page to select specific country or worldwide data preference.
+
+# GUI presents selections to user.
 def selection_GUI():
-    # Method displays the selected radio button country/worldwide selection back to the user before entering next view.
-    def selected_Country(*_):
-        # Valid radio button selection has been made, so make button visible. Allow user to proceed to next view.
-        nextButton.configure(state=NORMAL)
 
-        # Finally, return the selected country back to the user.
-        return country.get()
+    # Create tkinter GUI Window object.
+    root = tk.Tk()
 
-    def nextGUI():
-        # P)ass the country Slug to the displayData.py's display(countrySlug) method to initiate the display of data.
-        displayData.display(country.get())
-
-    # Create tkinter window object.
-    root = Tk()
-
-    # Background for countries_Frame box and contents within it.
+    # Background for frames containing list of countries, and worldwide selections.
     countryBG = "gray28"
 
-    # String variable used hold the selected radio button's value. (Country value)
-    country = StringVar()
+    # String variable used hold the selected radio button's value. (countryCode)
+    # This variable is passed through the various files in the application. We wil pass this to displayData.display()
+    # This allows other GUIs/methods used throughout the application to display data relevant to the selected country.
+    country = tk.StringVar()
 
-    # This frame will hold all the countries, radiobuttons and images; Think of it as a box.
-    countries_Frame = Frame(root, background=countryBG, padx=30, pady=16)
-
-    # Create ['Select A Country:'] label ontop of countries_Frame box.
-    label1 = Label(root, text="SELECT A COUNTRY:", bg="gray30", fg="light yellow", font=("Courier", 20, "bold"))
-
-    # Please note that, pady=(ytop, ybottom) paddings.
-    # Alternatively, padx=(Left/Right) paddings.
+    # Label at the top. ['Select A Country:']
+    label1 = tk.Label(root, text="SELECT A COUNTRY:", bg="gray30", fg="light yellow", font=("Courier", 20, "bold"))
     label1.pack(pady=(20, 2))
 
-    # Insert all [6] country flag images, and the radio buttons associated with each, into the countries_Frame.
+    # Frame containing all the selection of countries to pick from, and their respective images.
+    countries_Frame = tk.Frame(root, background=countryBG, padx=30, pady=16)
+
+    # Draw United States Flag.
     usaFlag = ImageTk.PhotoImage(Image.open('Flags/united-states.png').resize((80, 40), Image.ANTIALIAS))
-    usaLabel = Label(countries_Frame, image=usaFlag, background=countryBG)
-    usaLabel.grid(row=1, column=0, sticky=W + E)
+    usaLabel = tk.Label(countries_Frame, image=usaFlag, background=countryBG)
+    usaLabel.grid(row=1, column=0, sticky=tk.W + tk.E)
 
-    r1 = Radiobutton(countries_Frame, text="USA", value="united-states", var=country, font=("Courier", 20, "bold"))
-    r1.grid(row=1, column=1, sticky=W + E)
+    # Draw United States radio button.
+    r1 = tk.Radiobutton(countries_Frame, text="USA", value="united-states", var=country, font=("Courier", 20, "bold"))
+    r1.grid(row=1, column=1, sticky=tk.W + tk.E)
 
+    # Draw Canada Flag.
     canadaFlag = ImageTk.PhotoImage(Image.open('Flags/canada.png').resize((80, 40), Image.ANTIALIAS))
-    canadaLabel = Label(countries_Frame, image=canadaFlag, background=countryBG)
-    canadaLabel.grid(row=2, column=0, sticky=W + E)
+    canadaLabel = tk.Label(countries_Frame, image=canadaFlag, background=countryBG)
+    canadaLabel.grid(row=2, column=0, sticky=tk.W + tk.E)
 
-    r2 = Radiobutton(countries_Frame, text="CANADA", value="canada", var=country, font=("Courier", 20, "bold"))
-    r2.grid(row=2, column=1, sticky=W + E)
+    # Draw Canada radio button.
+    r2 = tk.Radiobutton(countries_Frame, text="CANADA", value="canada", var=country, font=("Courier", 20, "bold"))
+    r2.grid(row=2, column=1, sticky=tk.W + tk.E)
 
+    # Draw france Flag.
     franceFlag = ImageTk.PhotoImage(Image.open('Flags/france.png').resize((80, 40), Image.ANTIALIAS))
-    franceLabel = Label(countries_Frame, image=franceFlag, background=countryBG)
-    franceLabel.grid(row=1, column=2, sticky=W + E)
+    franceLabel = tk.Label(countries_Frame, image=franceFlag, background=countryBG)
+    franceLabel.grid(row=1, column=2, sticky=tk.W + tk.E)
 
-    r3 = Radiobutton(countries_Frame, text="FRANCE", value="france", var=country, font=("Courier", 20, "bold"))
-    r3.grid(row=1, column=3, sticky=W + E)
+    # Draw France radio button.
+    r3 = tk.Radiobutton(countries_Frame, text="FRANCE", value="france", var=country, font=("Courier", 20, "bold"))
+    r3.grid(row=1, column=3, sticky=tk.W + tk.E)
 
+    # Draw United Kingdom Flag.
     ukFlag = ImageTk.PhotoImage(Image.open('Flags/united-kingdom.png').resize((80, 40), Image.ANTIALIAS))
-    ukLabel = Label(countries_Frame, image=ukFlag, background=countryBG)
-    ukLabel.grid(row=2, column=2, sticky=W + E)
+    ukLabel = tk.Label(countries_Frame, image=ukFlag, background=countryBG)
+    ukLabel.grid(row=2, column=2, sticky=tk.W + tk.E)
 
-    r4 = Radiobutton(countries_Frame, text="U.K", value="united-kingdom", var=country, font=("Courier", 20, "bold"))
-    r4.grid(row=2, column=3, sticky=W + E)
+    # Draw United Kingdom radio button.
+    r4 = tk.Radiobutton(countries_Frame, text="U.K", value="united-kingdom", var=country, font=("Courier", 20, "bold"))
+    r4.grid(row=2, column=3, sticky=tk.W + tk.E)
 
+    # Draw Spain Flag.
     spainFlag = ImageTk.PhotoImage(Image.open('Flags/spain.png').resize((80, 40), Image.ANTIALIAS))
-    spainLabel = Label(countries_Frame, image=spainFlag, background=countryBG)
-    spainLabel.grid(row=1, column=4, sticky=W + E)
+    spainLabel = tk.Label(countries_Frame, image=spainFlag, background=countryBG)
+    spainLabel.grid(row=1, column=4, sticky=tk.W + tk.E)
 
-    r5 = Radiobutton(countries_Frame, text="SPAIN", value="spain", var=country, font=("Courier", 20, "bold"))
-    r5.grid(row=1, column=5, sticky=W + E)
+    # Draw Spain radio button.
+    r5 = tk.Radiobutton(countries_Frame, text="SPAIN", value="spain", var=country, font=("Courier", 20, "bold"))
+    r5.grid(row=1, column=5, sticky=tk.W + tk.E)
 
+    # Draw Italy Flag.
     italyFlag = ImageTk.PhotoImage(Image.open('Flags/italy.png').resize((80, 40), Image.ANTIALIAS))
-    italyLabel = Label(countries_Frame, image=italyFlag, background=countryBG)
-    italyLabel.grid(row=2, column=4, sticky=W + E)
+    italyLabel = tk.Label(countries_Frame, image=italyFlag, background=countryBG)
+    italyLabel.grid(row=2, column=4, sticky=tk.W + tk.E)
 
-    r6 = Radiobutton(countries_Frame, text="ITALY", value="italy", var=country, font=("Courier", 20, "bold"))
-    r6.grid(row=2, column=5, sticky=W + E)
+    # Draw Italy radio button.
+    r6 = tk.Radiobutton(countries_Frame, text="ITALY", value="italy", var=country, font=("Courier", 20, "bold"))
+    r6.grid(row=2, column=5, sticky=tk.W + tk.E)
 
-    # Draw ['Next'] button into box.
-    # Button will direct user to the displayData script, and pass on the selected country to the file; Disable button until valid radiobutton selection is made.
-    nextButton = Button(root, text="Next", width=10, height=2, fg="slate blue", font=("Courier", 20, "bold"),
-                        highlightbackground='pink', state=DISABLED, command=nextGUI)
+    # Draw Next Button; Button directs user to the next GUI upon valid selection.
+    nextButton = tk.Button(root, text="Next", width=10, height=2, fg="slate blue", font=("Courier", 20, "bold"),
+                           highlightbackground='pink', state=tk.DISABLED, command=displayData.display(country.get()))
 
-    # Draw the countries frame into window. Give it a padding of 20px, and fill in x direction.
-    # Gave all the columns an equal padding size, to ensure equal distribution of space amongst the box frame.
+    # Draw the frame containing the list of countries.
+    # Provided proper padding, and equal column distribution to ensure equal spacing.
     countries_Frame.columnconfigure(0, weight=1)
     countries_Frame.columnconfigure(1, weight=1)
     countries_Frame.columnconfigure(2, weight=1)
@@ -101,37 +99,40 @@ def selection_GUI():
     countries_Frame.columnconfigure(5, weight=1)
     countries_Frame.pack(fill='x', padx=30)
 
-    # Create ['SELECT WORLDWIDE:'] label ontop of worldwide_Frame box.
-    label2 = Label(root, text="OR, SELECT WORLDWIDE:", bg="gray30", fg="light yellow", font=("Courier", 20, "bold"))
+    # Label in the middle. ['Or, Select Worldwide:']
+    label2 = tk.Label(root, text="OR, SELECT WORLDWIDE:", bg="gray30", fg="light yellow", font=("Courier", 20, "bold"))
     label2.pack(pady=(20, 2))
 
-    # This frame will hold the worldwide radiobutton and image; Think of it as another contianer box.
-    worldwide_Frame = Frame(root, background=countryBG, padx=30, pady=16)
+    # Frame containing the worldWide radio button and flag.
+    worldwide_Frame = tk.Frame(root, background=countryBG, padx=30, pady=16)
 
-    # Insert worldwide image, and radiobutton into worldwide_Frame box container.
+    # Draw Worldwide Flag (Image).
     worldFlag = ImageTk.PhotoImage(Image.open('Flags/Earth.png').resize((76, 76), Image.ANTIALIAS))
-    worldLabel = Label(worldwide_Frame, image=worldFlag, background=countryBG)
+    worldLabel = tk.Label(worldwide_Frame, image=worldFlag, background=countryBG)
     worldLabel.grid(row=0)
 
-    r7 = Radiobutton(worldwide_Frame, text="WORLDWIDE", value="WORLDWIDE", var=country, font=("Courier", 20, "bold"))
+    # Draw Worldwide radio button.
+    r7 = tk.Radiobutton(worldwide_Frame, text="WORLDWIDE", value="WORLDWIDE", var=country, font=("Courier", 20, "bold"))
     r7.grid(row=1, column=0)
 
-    # Draw in the worldwide frame box container.
+    # Display worldwide Frame container.
     worldwide_Frame.rowconfigure(0, weight=1)
     worldwide_Frame.columnconfigure(0, weight=1)
     worldwide_Frame.pack(fill='x', padx=30)
 
-    # Draw the next button in to allow user to proceed to next GUI.
+    # Display the next button.
     nextButton.pack(fill='x', padx=120, pady=(10, 0))
 
-    # Window attributes for root; (Window size, bg color, title, etc. characteristics)
+    # Monitors when a valid radio button selection is made; Thus enabling the next button.
+    country.trace("w", nextButton.configure(state=tk.NORMAL))
+
+    # GUI attributes; (Window size, bg color, title, etc.)
     root.resizable(False, False)
     root.geometry("800x500")
     root.configure(background="ivory2")
     root.title("COVID-19 TRACKER")
-    # Displays the selected country; Via the RadioButton.
-    country.trace('w', selected_Country)
     root.mainloop()
 
-# Launch the selection GUI.
+
+# Launch the selection GUI; Execute application.
 selection_GUI()
