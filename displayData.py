@@ -1,20 +1,21 @@
-# This (.py) handles the display of data.
-# We will make the API request and fetch information as needed, if it is out of date.
-# When user makes a selection on the main.py, they are directed to this script upon the ['Next'] button click.
-# The statistics will be displayed, and stored in a JSON folder locally for the user to access if they wish.
+# This python file displays the data for the selected radio button country/worldWide value.
 
-from tkinter import *
+import tkinter as tk
 from PIL import Image, ImageTk
+
+# Python file containing all the methods for data manipulation/fetching/parsing, etc.
 import APIInterpreter as interpreter
+
+# Matplotlib library will be utilized to display the graph trend of COVID-19 statistics for selected country.
 import matplotlib.pyplot as plt
 from matplotlib import style
 
-# Not the ideal solution, but we are going to be ignoring any warnings the compiler gives during runtime.
-# We kept receiving a warning for axis in matplotlib, but it was just a suggestion from the compiler, not an error.
-# However, to eliminate the cluster in the compiler, we have chosen just to supress all warnings that may arise. 
+# Suppressing a matplotlib warning during runtime. Not a critical warning, just a suggestion.
 import warnings
 warnings.filterwarnings("ignore")
 
+
+# Method displays the confirmed, deaths, recovered cases for the selected country; Display additional features too.
 def display(countryCode):
 
     # Display the selected country, and populate the displayValues dictionary with the statistics.
@@ -30,7 +31,7 @@ def display(countryCode):
     recovered = displayValues['recovered']
     active = displayValues['active']
 
-    #Dictionary to convert countrySlug values into pretty string format.
+    # Minor formatting to the country names when displaying in title of GUI.
     convCountryName = {'united-states': "U.S.A",
                        'canada': 'CANADA',
                        'united-kingdom': 'UNITED KINGDOM',
@@ -38,77 +39,67 @@ def display(countryCode):
                        'spain': 'SPAIN',
                        'italy': 'ITALY'}
 
-    #Creates a GUI to display statistics for today's COVID-19 cases.
+    # Create GUI to display above information.
     def display_GUI():
-        master = Toplevel()
+        master = tk.Toplevel()
 
-        # Background for widgets in window.
+        # Background for widgets in GUI window.
         countryBG = "gray28"
 
-        # Image url for the countries' flag.
+        # Image url for the selected countries' flag.
         imgUrl = "Flags/" + countryCode + ".png"
 
-        # Frame to hold widgets and buttons within the window.
-        frame = Frame(master, background=countryBG, padx=30, pady=16)
-
-        #  Draw the clicked countries' flag into window.
+        # Draw the clicked countries' flag and name into its own frame.
+        frame = tk.Frame(master, background=countryBG, padx=30, pady=16)
         flag = ImageTk.PhotoImage(Image.open(imgUrl).resize((80, 40), Image.ANTIALIAS))
-        label = Label(frame, image=flag, background=countryBG)
+        label = tk.Label(frame, image=flag, background=countryBG)
         label.pack()
-
-        # Draw countries name next to flag.
-        label1 = Label(frame, text=convCountryName.get(countryCode),
-                       background=countryBG, font=("Courier", 26, "bold"))
+        label1 = tk.Label(frame, text=convCountryName.get(countryCode),
+                          background=countryBG, font=("Courier", 26, "bold"))
         label1.config(fg='mint cream')
         label1.pack()
-
         frame.pack(fill='x', padx=30, pady=(20, 30))
 
-        # Frame to display COVID-19 statistics.
-        frame2 = Frame(master, background=countryBG, padx=30, pady=16)
-
-        confirmedLabel = Label(frame2, text="Confirmed Cases: " + str(format(confirmed, ",d")),
-                       background=countryBG, font=("Courier", 24, "bold"))
+        # Display the confirmed number of cases in its own frame.
+        frame2 = tk.Frame(master, background=countryBG, padx=30, pady=16)
+        confirmedLabel = tk.Label(frame2, text="Confirmed Cases: " + str(format(confirmed, ",d")),
+                                  background=countryBG, font=("Courier", 24, "bold"))
         confirmedLabel.config(fg='mint cream')
         confirmedLabel.pack()
-
         frame2.pack(fill='x', padx=30, pady=10)
 
-        frame3 = Frame(master, background=countryBG, padx=30, pady=16)
-
-        recoveredLabel = Label(frame3, text="Recovered Cases: " + str(format(recovered, ",d")),
-                               background=countryBG, font=("Courier", 24, "bold"))
+        # Display the recovered number of cases in its own frame.
+        frame3 = tk.Frame(master, background=countryBG, padx=30, pady=16)
+        recoveredLabel = tk.Label(frame3, text="Recovered Cases: " + str(format(recovered, ",d")),
+                                  background=countryBG, font=("Courier", 24, "bold"))
         recoveredLabel.config(fg='mint cream')
         recoveredLabel.pack()
-
         frame3.pack(fill='x', padx=30, pady=5)
 
-        frame4 = Frame(master, background=countryBG, padx=30, pady=16)
-
-        deathLabel = Label(frame4, text="Death count: " + str(format(deaths, ",d")),
-                               background=countryBG, font=("Courier", 24, "bold"))
+        # Display the death number in its own frame.
+        frame4 = tk.Frame(master, background=countryBG, padx=30, pady=16)
+        deathLabel = tk.Label(frame4, text="Death count: " + str(format(deaths, ",d")),
+                              background=countryBG, font=("Courier", 24, "bold"))
         deathLabel.config(fg='mint cream')
         deathLabel.pack()
-
         frame4.pack(fill='x', padx=30, pady=5)
 
-        #Button directs user to the matplotlib graph trend.
-        graphButton = Button(master, text="Display Graph", height=2, fg="slate blue", font=("Courier", 20, "bold"),
-                            highlightbackground='pink', command=display_Graph)
+        # Draw button to direct user to a graph trend of the selected country's COVID cases.
+        graphButton = tk.Button(master, text="Display Graph", height=2, fg="slate blue", font=("Courier", 20, "bold"),
+                                highlightbackground='pink', command=display_Graph)
         graphButton.pack(fill='x', padx=30, pady=10)
 
-        # Window's attributes.
+        # GUI's attributes.
         master.resizable(False, False)
         master.configure(background="ivory2")
         master.geometry("600x600")
         master.title(convCountryName.get(countryCode) + " | COVID-19 TRACKER")
         master.mainloop()
 
-
-    #Method displays the graph trend for the specific country.
+    # Method displays the graph trend for the specific country.
     def display_Graph():
 
-        # Return the data for the specific country from April 13th - Present.
+        # Return the data for the specific country, up until the present date.
         data = interpreter.getCasesList(countryCode)
 
         # Theme for the plot.
@@ -164,12 +155,10 @@ def display(countryCode):
         plt.title('COVID-19 TREND')
         plt.legend()
 
-        #Sets the spacing for the xlabel ticks. (To prevent overlapping of xlabels on graph. )
+        # Sets the spacing for the xlabel ticks. (To prevent overlapping of xlabels on graph. )
         ax.xaxis.set_major_locator(plt.MultipleLocator(5))
 
-        #plt.xticks(rotation=20)
-
-        # Change title for figure window.
+        # Change title for matplotlib window.
         fig = plt.gcf()
         fig.canvas.set_window_title('COVID-19 TRACKER')
         plt.show()
