@@ -20,7 +20,7 @@ def display(countryCode):
 
     # Display the selected country, and populate the displayValues dictionary with the statistics.
     print("Selected: " + countryCode)
-    displayValues = interpreter.getCases(countryCode)
+    displayValues = interpreter.getCases(country=countryCode)
     print("[Fetch Complete]")
 
     # Grab the respective stats from the dictionary that are of interest to us.
@@ -100,7 +100,7 @@ def display(countryCode):
     def display_Graph():
 
         # Return the data for the specific country, up until the present date.
-        data = interpreter.getCasesList(countryCode)
+        data = interpreter.getCasesList(country=countryCode)
 
         # Theme for the plot.
         style.use('bmh')
