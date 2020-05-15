@@ -186,14 +186,9 @@ def display(countryCode):
         # Sets the spacing for the xlabel ticks. (To prevent overlapping of xlabels on graph. )
         ax.xaxis.set_major_locator(plt.MultipleLocator(30))
 
-        def onclick(event):
-            print(event.xdata, event.ydata)
-
         # Change title for matplotlib window.
         fig = plt.gcf()
         fig.canvas.set_window_title(convCountryName.get(countryCode) + ' | COVID-19 TRACKER')
-
-
         plt.show()
 
     display_GUI()
