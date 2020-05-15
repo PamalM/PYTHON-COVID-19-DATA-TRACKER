@@ -377,9 +377,13 @@ def findProvinceJson(countryslug, province, date):
 def updateProvincesJson(countryslug):
     print(f"Fetching {countryslug}'s provinces data from API...")
 
-    response = requests.get("https://api.covid19api.com/live/country/" + countryslug)
-    json = response.json()
-    __storeAsJson(json, provinces=True)
+    try:
+        data = requests.get("https://api.covid19api.com/live/country/" + countryslug).json()
+        __storeAsJson(data, provinces=True)
+    except (ConnectionError, ConnectionRefusedError, ConnectionResetError) as e:
+        print("Could not connect to API...")
+    except json.decoder.JSONDecodeError:
+        print("API Error...")
 
 def findCountryJson(countryslug, date):
     try:
@@ -402,27 +406,40 @@ def findCountryJson(countryslug, date):
 
 def updateCountryJson(countryslug):
     print("Fetching country data from API...")
+    try:
+        data = requests.get("https://api.thevirustracker.com/free-api?countryTimeline=" + slugtoalpha2[countryslug]).json()
+        __storeAsJson(data, country=True, countryslug=countryslug)
+    except (ConnectionError, ConnectionRefusedError, ConnectionResetError) as e:
+        print("Could not connect to API...")
+    except json.decoder.JSONDecodeError:
+        print("API Error...")
 
-    json = requests.get("https://api.thevirustracker.com/free-api?countryTimeline=" + slugtoalpha2[countryslug]).json()
-    __storeAsJson(json, country=True, countryslug=countryslug)
 
 def findContinentJson(continent, date):
     pass
 
 def updateContinentsJson():
     print("Fetching continental data from API...")
-
-    json = requests.get("https://corona.lmao.ninja/v2/continents?yesterday=true&sort")
-    __storeAsJson(json, continents=True)
+    try:
+        data = requests.get("https://corona.lmao.ninja/v2/continents?yesterday=true&sort")
+        __storeAsJson(data, continents=True)
+    except (ConnectionError, ConnectionRefusedError, ConnectionResetError) as e:
+        print("Could not connect to API...")
+    except json.decoder.JSONDecodeError:
+        print("API Error...")
 
 def findWorldwideJson(date):
     pass
 
 def updateWorldwideJson():
     print("Fetching worldwide data from API...")
-
-    json = requests.get("https://api.thevirustracker.com/free-api?global=stats")
-    __storeAsJson(json, worldwide=True)
+    try:
+        data = requests.get("https://api.thevirustracker.com/free-api?global=stats")
+        __storeAsJson(data, worldwide=True)
+    except (ConnectionError, ConnectionRefusedError, ConnectionResetError) as e:
+        print("Could not connect to API...")
+    except json.decoder.JSONDecodeError:
+        print("API Error...")
 
 #endregion JSON Retrieval Methods
 
