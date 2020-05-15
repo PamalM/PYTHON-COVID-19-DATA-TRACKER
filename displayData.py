@@ -157,7 +157,7 @@ def display(countryCode):
         # List containing the dates in the format we want them in to show on the graph.
         formatedDates = []
         for date in dates:
-            formatedDates.append(monthConv.get(int(date[5:7])) + "/" + date[8:10] + "\n" + date[0:4])
+            formatedDates.append(monthConv.get(int(date[5:7])) + "/" + date[8:10] + "/" + date[0:4])
 
         # Plot lists onto graph.
         plt.plot(formatedDates, confirmedCount, label='Confirmed Cases', color='b', marker='.')
