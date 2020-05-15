@@ -349,6 +349,18 @@ def __parseDates(country,province,dates,data):
 #endregion Parsing Methods
 
 #region JSON Retrieval Methods
+def __getResponse(request):
+    try:
+        response = requests.get(request)
+        print(response)
+        return(response.json())
+    except (ConnectionError, ConnectionRefusedError, ConnectionResetError) as e:
+        print("Could not connect to API...")
+    except json.decoder.JSONDecodeError:
+        print("API Error...")
+
+    return None
+
 def findProvinceJson(countryslug, province, date):
 
     countryname = slugtoname[countryslug]
@@ -376,14 +388,8 @@ def findProvinceJson(countryslug, province, date):
 
 def updateProvincesJson(countryslug):
     print(f"Fetching {countryslug}'s provinces data from API...")
-
-    try:
-        data = requests.get("https://api.covid19api.com/live/country/" + countryslug).json()
-        __storeAsJson(data, provinces=True)
-    except (ConnectionError, ConnectionRefusedError, ConnectionResetError) as e:
-        print("Could not connect to API...")
-    except json.decoder.JSONDecodeError:
-        print("API Error...")
+    data = __getResponse("https://api.covid19api.com/live/country/" + countryslug)
+    if data != None: __storeAsJson(data, provinces=True)
 
 def findCountryJson(countryslug, date):
     try:
@@ -406,40 +412,25 @@ def findCountryJson(countryslug, date):
 
 def updateCountryJson(countryslug):
     print("Fetching country data from API...")
-    try:
-        data = requests.get("https://api.thevirustracker.com/free-api?countryTimeline=" + slugtoalpha2[countryslug]).json()
-        __storeAsJson(data, country=True, countryslug=countryslug)
-    except (ConnectionError, ConnectionRefusedError, ConnectionResetError) as e:
-        print("Could not connect to API...")
-    except json.decoder.JSONDecodeError:
-        print("API Error...")
-
+    data = __getResponse("https://api.thevirustracker.com/free-api?countryTimeline=" + slugtoalpha2[countryslug])
+    if data != None: __storeAsJson(data, country=True, countryslug=countryslug)
 
 def findContinentJson(continent, date):
     pass
 
 def updateContinentsJson():
     print("Fetching continental data from API...")
-    try:
-        data = requests.get("https://corona.lmao.ninja/v2/continents?yesterday=true&sort")
-        __storeAsJson(data, continents=True)
-    except (ConnectionError, ConnectionRefusedError, ConnectionResetError) as e:
-        print("Could not connect to API...")
-    except json.decoder.JSONDecodeError:
-        print("API Error...")
+    data = __getResponse("https://corona.lmao.ninja/v2/continents?yesterday=true&sort")
+    if data != None: __storeAsJson(data, continents=True)
+
 
 def findWorldwideJson(date):
     pass
 
 def updateWorldwideJson():
     print("Fetching worldwide data from API...")
-    try:
-        data = requests.get("https://api.thevirustracker.com/free-api?global=stats")
-        __storeAsJson(data, worldwide=True)
-    except (ConnectionError, ConnectionRefusedError, ConnectionResetError) as e:
-        print("Could not connect to API...")
-    except json.decoder.JSONDecodeError:
-        print("API Error...")
+    data = requests.get("https://api.thevirustracker.com/free-api?global=stats")
+    if data != None: __storeAsJson(data, worldwide=True)
 
 #endregion JSON Retrieval Methods
 
@@ -469,9 +460,10 @@ def getCases(worldwide=False, continent=None, country="canada", province=None, a
     #Could not find data after x attempts, returns an invalid case dictionary
     if(attempts == 0): return __errorCaseDict()
     #Otherwise try again now that data has been retrieved
+
     else: return getCases(worldwide=worldwide, continent=continent, country=country, province=province, attempts=(attempts-1), date=date)
 
-def getCasesList(worldwide=False, continent=None, country="canada", province=None, attempts=1, startdate="2020-01-27", enddate=datetime.today()-timedelta(days=1)):
+def getCasesList(worldwide=False, continent=None, country="canada", province=None, startdate="2020-01-27", enddate=datetime.today()-timedelta(days=1)):
     caselist = []
     #Earliest date provided by the API
     mindate = __convertStringDatetime("2020-01-27")
@@ -484,7 +476,7 @@ def getCasesList(worldwide=False, continent=None, country="canada", province=Non
     if enddate > maxdate: enddate = maxdate
 
     while __convertDatetimeString(currentdate) !=  __convertDatetimeString(enddate):
-        caselist.append({"date":__convertDatetimeString(currentdate), "cases":getCases(worldwide=worldwide, continent=continent, country=country, province=province, attempts=attempts, date=currentdate)})
+        caselist.append({"date":__convertDatetimeString(currentdate), "cases":getCases(worldwide=worldwide, continent=continent, country=country, province=province, attempts=0, date=currentdate)})
         currentdate += timedelta(days=1)
 
     return caselist
