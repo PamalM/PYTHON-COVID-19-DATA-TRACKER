@@ -146,10 +146,10 @@ def __storeAsJson(*data, worldwide=False, continents=False, country=False, count
         print("No parameters selected...")
 
 def __storeAsJsonWorldwide(data):
-    pass
+    __parseWorld(data)
 
 def __storeAsJsonContinents(data):
-    pass
+    __parseContinents(data)
 
 def __storeAsJsonCountry(data, countryslug):
     countryname = slugtoname[countryslug]
@@ -189,7 +189,12 @@ def __storeAsJsonCountryProvinces(data):
 def __parseWorld(data):
     pass
 
-def __parseContinent(continent, data):
+def __parseContinents(data):
+    # fileManager.mkexistsdir("JSON")
+    # #Check if countries json file exists, if not, create it
+    # fileManager.jsonPreset(continentsjsonpath,"continents")
+
+    # dates = []
     pass
 
 def __parseCountry(country, slug, data):
@@ -197,22 +202,38 @@ def __parseCountry(country, slug, data):
     #Check if countries json file exists, if not, create it
     fileManager.jsonPreset(countriesjsonpath,"countries")
 
+    #Get index of country in json array
+    countrieslist = fileManager.readList(countriesjsonpath,"countries")
+    index = __indexOfValueInList("country", country, countrieslist)
+
     dates = []
-
-
     itemdict = data[0]["timelineitems"][0]
-
+    prevdict = __errorCaseDict()
     for date, casedictionary in itemdict.items():
         if(date=="stat"): continue
 
         cases = __blankCaseDict()
 
-        cases["Confirmed"] = casedictionary["total_cases"]
-        cases["Deaths"] = casedictionary["total_deaths"]
-        cases["Recovered"] = casedictionary["total_recoveries"]
+        if(prevdict["Confirmed"] > casedictionary["total_cases"]):
+             cases["Confirmed"] = prevdict["Confirmed"]
+        else:
+            cases["Confirmed"] = casedictionary["total_cases"]
+
+        if(prevdict["Deaths"] > casedictionary["total_deaths"]):
+            cases["Deaths"] = prevdict["Deaths"]
+        else:
+            cases["Deaths"] = casedictionary["total_deaths"]
+
+        if(prevdict["Recovered"] > casedictionary["total_recoveries"]):
+            cases["Recovered"] = prevdict["Recovered"]
+        else:
+            cases["Recovered"] = casedictionary["total_recoveries"]
+
         cases["Active"] = cases["Confirmed"]-cases["Deaths"]-cases["Recovered"]
 
         converteddate = __convertSlashDate(date)
+
+        prevdict = cases
 
         dates.append({"date":converteddate, "cases":cases})
 
@@ -220,8 +241,9 @@ def __parseCountry(country, slug, data):
     path = __getCountryJson(country)
 
     newinfodict = {"country":country,"slug":slug,"file":path,"dates":dates}
-    countrieslist = []
-    countrieslist.append(newinfodict)
+
+    if(index < len(countrieslist)): countrieslist[index] = newinfodict
+    else: countrieslist.append(newinfodict)
 
     #Rewrite the json file
     fileManager.writeList(countriesjsonpath,"countries",countrieslist)
@@ -391,7 +413,7 @@ def updateContinentsJson():
     print("Fetching continental data from API...")
 
     json = requests.get("https://corona.lmao.ninja/v2/continents?yesterday=true&sort")
-    __storeAsJson(continents=True)
+    __storeAsJson(json, continents=True)
 
 def findWorldwideJson(date):
     pass
@@ -400,7 +422,7 @@ def updateWorldwideJson():
     print("Fetching worldwide data from API...")
 
     json = requests.get("https://api.thevirustracker.com/free-api?global=stats")
-    __storeAsJson(worldwide=True)
+    __storeAsJson(json, worldwide=True)
 
 #endregion JSON Retrieval Methods
 
