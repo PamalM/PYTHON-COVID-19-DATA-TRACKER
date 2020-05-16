@@ -5,7 +5,6 @@ import fileManager
 
 #Path for countries.json
 countriesjsonpath = "JSON/countries.json"
-continentsjsonpath = "JSON/continents.json"
 worldjsonpath = "JSON/world.json"
 
 #region Converters
@@ -132,12 +131,10 @@ def __getDateJson(country, province, date):
 
 #region Parsing Methods
 #Reformats the returned json and organizes information into subdirectories
-def __storeAsJson(*data, worldwide=False, continents=False, country=False, countryslug="canada", provinces=False):
+def __storeAsJson(*data, worldwide=False, country=False, countryslug="canada", provinces=False):
 
     if(worldwide):
         __storeAsJsonWorldwide(data)
-    elif(continents):
-        __storeAsJsonContinents(data)
     elif(country):
         __storeAsJsonCountry(data, countryslug)
     elif(provinces):
@@ -147,9 +144,6 @@ def __storeAsJson(*data, worldwide=False, continents=False, country=False, count
 
 def __storeAsJsonWorldwide(data):
     __parseWorld(data)
-
-def __storeAsJsonContinents(data):
-    __parseContinents(data)
 
 def __storeAsJsonCountry(data, countryslug):
     countryname = slugtoname[countryslug]
@@ -187,15 +181,23 @@ def __storeAsJsonCountryProvinces(data):
     __parseProvinces(countryname, provinces)
 
 def __parseWorld(data):
-    pass
+    fileManager.mkexistsdir("JSON")
 
-def __parseContinents(data):
-    # fileManager.mkexistsdir("JSON")
-    # #Check if countries json file exists, if not, create it
-    # fileManager.jsonPreset(continentsjsonpath,"continents")
+    datevalues = []
+    for date in data["cases"].keys():
+        datevalues.append(date)
 
-    # dates = []
-    pass
+    dates = []
+    for date in datevalues:
+        cases = __blankCaseDict()
+        cases["Confirmed"] = data["cases"][date]
+        cases["Deaths"] = data["deaths"][date]
+        cases["Recovered"] = data["recovered"][date]
+        cases["Active"] = cases["Confirmed"] - cases["Deaths"] - cases["Recovered"]
+        tempdict = {"date":__convertSlashDate(date), "cases":cases}
+        dates.append(tempdict)
+
+    fileManager.writeJson(dates)
 
 def __parseCountry(country, slug, data):
     fileManager.mkexistsdir("JSON")
@@ -415,39 +417,28 @@ def updateCountryJson(countryslug):
     data = __getResponse("https://api.thevirustracker.com/free-api?countryTimeline=" + slugtoalpha2[countryslug])
     if data != None: __storeAsJson(data, country=True, countryslug=countryslug)
 
-def findContinentJson(continent, date):
-    pass
-
-def updateContinentsJson():
-    print("Fetching continental data from API...")
-    data = __getResponse("https://corona.lmao.ninja/v2/continents?yesterday=true&sort")
-    if data != None: __storeAsJson(data, continents=True)
-
 
 def findWorldwideJson(date):
     pass
 
 def updateWorldwideJson():
     print("Fetching worldwide data from API...")
-    data = requests.get("https://api.thevirustracker.com/free-api?global=stats")
+    data = __getResponse("https://corona.lmao.ninja/v2/historical/all")
     if data != None: __storeAsJson(data, worldwide=True)
 
 #endregion JSON Retrieval Methods
 
 #region Get Case Dictionary Methods
 #Returns a dictionary with Covid-19 Case counts
-def getCases(worldwide=False, continent=None, country="canada", province=None, attempts=3, date=datetime.today()-timedelta(days=1)):
+def getCases(worldwide=False, country="canada", province=None, attempts=3, date=datetime.today()-timedelta(days=1)):
 
     cases = {}
 
     datestring = __convertDatetimeString(date)
 
-    #Determine whether to look for worldwide, continental, country or province info
+    #Determine whether to look for worldwide, country or province info
     if(worldwide):
         cases = findWorldwideJson(datestring)
-
-    elif(continent != None):
-        cases = findContinentJson(continent, datestring)
 
     elif(province == None):
         cases = findCountryJson(country, datestring)
@@ -461,12 +452,12 @@ def getCases(worldwide=False, continent=None, country="canada", province=None, a
     if(attempts == 0): return __errorCaseDict()
     #Otherwise try again now that data has been retrieved
 
-    else: return getCases(worldwide=worldwide, continent=continent, country=country, province=province, attempts=(attempts-1), date=date)
+    else: return getCases(worldwide=worldwide, country=country, province=province, attempts=(attempts-1), date=date)
 
-def getCasesList(worldwide=False, continent=None, country="canada", province=None, startdate="2020-01-27", enddate=datetime.today()-timedelta(days=1)):
+def getCasesList(worldwide=False, country="canada", province=None, startdate="2020-01-27", enddate=datetime.today()-timedelta(days=1)):
     caselist = []
     #Earliest date provided by the API
-    mindate = __convertStringDatetime("2020-01-27")
+    mindate = __convertStringDatetime(startdate)
     maxdate = datetime.today()-timedelta(days=1)
 
     currentdate = __convertStringDatetime(startdate)
@@ -476,8 +467,11 @@ def getCasesList(worldwide=False, continent=None, country="canada", province=Non
     if enddate > maxdate: enddate = maxdate
 
     while __convertDatetimeString(currentdate) !=  __convertDatetimeString(enddate):
-        caselist.append({"date":__convertDatetimeString(currentdate), "cases":getCases(worldwide=worldwide, continent=continent, country=country, province=province, attempts=0, date=currentdate)})
+        caselist.append({"date":__convertDatetimeString(currentdate), "cases":getCases(worldwide=worldwide, country=country, province=province, attempts=0, date=currentdate)})
         currentdate += timedelta(days=1)
 
     return caselist
 #endregion Get Case Dictionary Methods
+
+data = __getResponse("https://corona.lmao.ninja/v2/historical/all")
+__parseWorld(data)
