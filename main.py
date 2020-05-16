@@ -15,8 +15,6 @@ def selection_GUI():
 
     # Tracks and saves the selected country, and updates the stringvar().
     def monitorCountry(*_):
-        global selectedCountry
-        selectedCountry = country.get()
         # Enable next button state to allow user to proceed to next GUI.
         nextButton.configure(state=tk.NORMAL)
         return country.get()
@@ -99,7 +97,7 @@ def selection_GUI():
 
     # Draw Next Button; Button directs user to the next GUI upon valid selection.
     nextButton = tk.Button(root, text="Next", width=10, height=2, fg="slate blue", font=("Courier", 20, "bold"),
-                           highlightbackground='pink', state=tk.DISABLED, command=lambda: nextGUI())
+                           highlightbackground='pink', state=tk.DISABLED, command=nextGUI)
 
     # Draw the frame containing the list of countries.
     # Provided proper padding, and equal column distribution to ensure equal spacing.
