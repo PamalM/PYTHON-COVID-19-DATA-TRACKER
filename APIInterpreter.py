@@ -181,6 +181,7 @@ def __storeAsJsonCountryProvinces(data):
     __parseProvinces(countryname, provinces)
 
 def __parseWorld(data):
+    data = data[0]
     fileManager.mkexistsdir("JSON")
 
     datevalues = []
@@ -197,7 +198,7 @@ def __parseWorld(data):
         tempdict = {"date":__convertSlashDate(date), "cases":cases}
         dates.append(tempdict)
 
-    fileManager.writeJson(dates)
+    fileManager.writeJson(worldjsonpath, dates)
 
 def __parseCountry(country, slug, data):
     fileManager.mkexistsdir("JSON")
@@ -419,11 +420,18 @@ def updateCountryJson(countryslug):
 
 
 def findWorldwideJson(date):
-    pass
+
+    if(fileManager.exists(worldjsonpath)):
+        worldjson = fileManager.readJson(worldjsonpath)
+        for value in worldjson:
+            if value["date"] == date:
+                return value["cases"]
+
+    updateWorldwideJson()
 
 def updateWorldwideJson():
     print("Fetching worldwide data from API...")
-    data = __getResponse("https://corona.lmao.ninja/v2/historical/all")
+    data = __getResponse("https://corona.lmao.ninja/v2/historical/all?lastdays=all")
     if data != None: __storeAsJson(data, worldwide=True)
 
 #endregion JSON Retrieval Methods
@@ -472,6 +480,3 @@ def getCasesList(worldwide=False, country="canada", province=None, startdate="20
 
     return caselist
 #endregion Get Case Dictionary Methods
-
-data = __getResponse("https://corona.lmao.ninja/v2/historical/all")
-__parseWorld(data)
