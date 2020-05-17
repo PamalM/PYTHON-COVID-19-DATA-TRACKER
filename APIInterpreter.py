@@ -82,7 +82,9 @@ def __convertDatetimeString(datetime):
 def __convertSlashDate(date):
     parts = date.split("/")
 
-    if(len(parts[0]) == 1): returndate = f"20{parts[2]}-0{parts[0]}-{parts[1]}"
+    if(len(parts[0]) == 1 and len(parts[1]) == 1): returndate = f"20{parts[2]}-0{parts[0]}-0{parts[1]}"
+    elif (len(parts[0]) == 1): returndate = f"20{parts[2]}-0{parts[0]}-{parts[1]}"
+    elif (len(parts[1]) == 1): returndate = f"20{parts[2]}-{parts[0]}-0{parts[1]}"
     else: returndate = f"20{parts[2]}-{parts[0]}-{parts[1]}"
 
     return returndate
@@ -386,7 +388,7 @@ def findProvinceJson(countryslug, province, date):
 
     #If the country's case counts can not be found the following will be executed
     #Fetch most recent data from Covid19 API and update the JSON directory
-    updateProvincesJson(countryslug)
+
     return None
 
 def updateProvincesJson(countryslug):
@@ -410,8 +412,8 @@ def findCountryJson(countryslug, date):
     except IndexError:
         pass
 
-    updateCountryJson(countryslug)
-    pass
+
+    return None
 
 def updateCountryJson(countryslug):
     print("Fetching country data from API...")
@@ -427,7 +429,8 @@ def findWorldwideJson(date):
             if value["date"] == date:
                 return value["cases"]
 
-    updateWorldwideJson()
+
+    return None
 
 def updateWorldwideJson():
     print("Fetching worldwide data from API...")
@@ -456,13 +459,17 @@ def getCases(worldwide=False, country="canada", province=None, attempts=3, date=
 
     if cases != None: return cases
 
-    #Could not find data after x attempts, returns an invalid case dictionary
-    if(attempts == 0): return __errorCaseDict()
-    #Otherwise try again now that data has been retrieved
+    else:
+        #Could not find data after x attempts, returns an invalid case dictionary
+        if(attempts == 0): return __errorCaseDict()
+        #Otherwise try again now that data has been retrieved
+        if(worldwide): updateWorldwideJson()
+        elif(province == None): updateCountryJson(country)
+        else: updateProvincesJson(country)
 
-    else: return getCases(worldwide=worldwide, country=country, province=province, attempts=(attempts-1), date=date)
+        return getCases(worldwide=worldwide, country=country, province=province, attempts=(attempts-1), date=date)
 
-def getCasesList(worldwide=False, country="canada", province=None, startdate="2020-01-27", enddate=datetime.today()-timedelta(days=1)):
+def getCasesList(worldwide=False, country="canada", province=None, startdate="2020-01-22", enddate=datetime.today()-timedelta(days=1)):
     caselist = []
     #Earliest date provided by the API
     mindate = __convertStringDatetime(startdate)
@@ -474,9 +481,12 @@ def getCasesList(worldwide=False, country="canada", province=None, startdate="20
         currentdate = mindate
     if enddate > maxdate: enddate = maxdate
 
+    first = 1
     while __convertDatetimeString(currentdate) !=  __convertDatetimeString(enddate):
-        caselist.append({"date":__convertDatetimeString(currentdate), "cases":getCases(worldwide=worldwide, country=country, province=province, attempts=0, date=currentdate)})
+        caselist.append({"date":__convertDatetimeString(currentdate), "cases":getCases(worldwide=worldwide, country=country, province=province, attempts=first, date=currentdate)})
+        first = 0
         currentdate += timedelta(days=1)
 
     return caselist
 #endregion Get Case Dictionary Methods
+
