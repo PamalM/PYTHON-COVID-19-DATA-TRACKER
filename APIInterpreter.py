@@ -163,7 +163,7 @@ def __storeAsJsonCountryProvinces(data):
     [provinces.append(value["Province"]) for value in data if(value["Province"] not in provinces)]
 
     #Find the earliest date listed
-    earliestdate = datetime.today()
+    earliestdate = __convertStringDatetime("2020-01-22")
     for value in data:
         tempdate = __convertStringDatetime(__convertDatetimeString(value["Date"]))
         if(tempdate < earliestdate):
@@ -338,7 +338,7 @@ def __parseDates(country,province,dates,data):
                     prevdate = fileManager.readJson(__getDateJson(country, province, dates[index-1]))
                     cases = __assignCases(prevdate)
                 except FileNotFoundError:
-                    pass
+                    cases = __blankCaseDict()
 
             #Write the case information to the date's json file
             fileManager.writeJson(path,cases)
@@ -490,3 +490,4 @@ def getCasesList(worldwide=False, country="canada", province=None, startdate="20
     return caselist
 #endregion Get Case Dictionary Methods
 
+print(getCasesList(country="united-kingdom"))
