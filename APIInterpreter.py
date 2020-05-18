@@ -489,5 +489,3 @@ def getCasesList(worldwide=False, country="canada", province=None, startdate="20
 
     return caselist
 #endregion Get Case Dictionary Methods
-
-print(getCasesList(country="united-kingdom"))
