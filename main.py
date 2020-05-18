@@ -21,7 +21,11 @@ def selection_GUI():
 
     # After selection is made, direct user to next GUI with next button press.
     def nextGUI():
-        displayData.display(country.get())
+        if country.get() == "WORLDWIDE":
+            displayData.display_World()
+
+        else:
+            displayData.display_Country(country.get())
 
     # Create tkinter GUI Window object.
     root = tk.Tk()
