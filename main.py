@@ -9,14 +9,11 @@ from PIL import Image, ImageTk
 # After selection is made in main.py, the selection is passed to displayData.py
 import displayData
 
-
 # GUI presents selections to user.
 def selection_GUI():
 
     # Tracks and saves the selected country, and updates the stringvar().
     def monitorCountry(*_):
-        # Enable next button state to allow user to proceed to next GUI.
-        nextButton.configure(state=tk.NORMAL)
         return country.get()
 
     # After selection is made, direct user to next GUI with next button press.
@@ -36,7 +33,7 @@ def selection_GUI():
     # String variable used hold the selected radio button's value. (countryCode)
     # This variable is passed through the various files in the application. We wil pass this to displayData.display()
     # This allows other GUIs/methods used throughout the application to display data relevant to the selected country.
-    country = tk.StringVar()
+    country = tk.StringVar(value='canada')
 
     # Label at the top. ['Select A Country:']
     label1 = tk.Label(root, text="SELECT A COUNTRY:", bg="gray30", fg="light yellow", font=("Courier", 20, "bold"))
@@ -101,7 +98,7 @@ def selection_GUI():
 
     # Draw Next Button; Button directs user to the next GUI upon valid selection.
     nextButton = tk.Button(root, text="Next", width=10, height=2, fg="slate blue", font=("Courier", 20, "bold"),
-                           highlightbackground='pink', state=tk.DISABLED, command=nextGUI)
+                           highlightbackground='pink', command=nextGUI)
 
     # Draw the frame containing the list of countries.
     # Provided proper padding, and equal column distribution to ensure equal spacing.
