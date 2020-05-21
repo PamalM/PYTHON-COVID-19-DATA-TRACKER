@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="52be5131-cd8f-48f6-b35d-fb0786034c78" name="Default Changelist" comment="- Display worldwide statistics&#10;- Graph displays trend for worldwide cases over a course of the last 4 months. &#10;- TODO: Implement the display of worldwide stats, and specific countries stats into one method. [To minimize double code]">
+    <list default="true" id="52be5131-cd8f-48f6-b35d-fb0786034c78" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/displayData.py" beforeDir="false" afterPath="$PROJECT_DIR$/displayData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -216,7 +215,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589760333969</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="- Major code reform. Changed large chunks of code in displayData.py&#10;- Removed seperate method for worldwide selection, instead now one method handles the display of the statistics and if statements are used to differentiate between specific country/worldwide radio button selection.&#10;&#10;- TODO: Implement API fetch/display of News functionality. &#10;- TODO: Display individual provincial/state data for countries. &#10;- TODO: Implement third function for worldwide selection.">
+      <created>1590028221959</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1590028221959</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -230,55 +236,56 @@
     <MESSAGE value="- Cleaned up some whitespace, and fixed tkinter 'NoneType' error at runtime." />
     <MESSAGE value="- Formatted the graph, changed the ticks for death count&#10;- Made graph display dates in intervals of months. &#10;- Added button that introduces the news api feature" />
     <MESSAGE value="- Display worldwide statistics&#10;- Graph displays trend for worldwide cases over a course of the last 4 months. &#10;- TODO: Implement the display of worldwide stats, and specific countries stats into one method. [To minimize double code]" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Display worldwide statistics&#10;- Graph displays trend for worldwide cases over a course of the last 4 months. &#10;- TODO: Implement the display of worldwide stats, and specific countries stats into one method. [To minimize double code]" />
+    <MESSAGE value="- Major code reform. Changed large chunks of code in displayData.py&#10;- Removed seperate method for worldwide selection, instead now one method handles the display of the statistics and if statements are used to differentiate between specific country/worldwide radio button selection.&#10;&#10;- TODO: Implement API fetch/display of News functionality. &#10;- TODO: Display individual provincial/state data for countries. &#10;- TODO: Implement third function for worldwide selection." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Major code reform. Changed large chunks of code in displayData.py&#10;- Removed seperate method for worldwide selection, instead now one method handles the display of the statistics and if statements are used to differentiate between specific country/worldwide radio button selection.&#10;&#10;- TODO: Implement API fetch/display of News functionality. &#10;- TODO: Display individual provincial/state data for countries. &#10;- TODO: Implement third function for worldwide selection." />
   </component>
   <component name="WindowStateProjectService">
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588714374641">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1588714374641" />
-    <state x="0" y="15" key="CommitChangelistDialog2" timestamp="1590003812704">
+    <state x="0" y="15" key="CommitChangelistDialog2" timestamp="1590028221581">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="-1920" y="18" key="CommitChangelistDialog2/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589394126237" />
-    <state x="0" y="15" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1590003812704" />
-    <state width="1419" height="301" key="GridCell.Tab.0.bottom" timestamp="1590028041599">
+    <state x="0" y="15" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1590028221581" />
+    <state width="1419" height="301" key="GridCell.Tab.0.bottom" timestamp="1590028580522">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1899" height="373" key="GridCell.Tab.0.bottom/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589399406230" />
-    <state width="1419" height="301" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1590028041599" />
+    <state width="1419" height="301" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1590028580522" />
     <state width="1419" height="245" key="GridCell.Tab.0.bottom/0.23.1440.805@0.23.1440.805" timestamp="1588808686164" />
     <state width="1899" height="373" key="GridCell.Tab.0.bottom/0.23.1440.877/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589393566329" />
-    <state width="1419" height="301" key="GridCell.Tab.0.center" timestamp="1590028041598">
+    <state width="1419" height="301" key="GridCell.Tab.0.center" timestamp="1590028580521">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1899" height="373" key="GridCell.Tab.0.center/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589399406227" />
-    <state width="1419" height="301" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1590028041598" />
+    <state width="1419" height="301" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1590028580521" />
     <state width="1419" height="245" key="GridCell.Tab.0.center/0.23.1440.805@0.23.1440.805" timestamp="1588808686163" />
     <state width="1899" height="373" key="GridCell.Tab.0.center/0.23.1440.877/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589393566326" />
-    <state width="1419" height="301" key="GridCell.Tab.0.left" timestamp="1590028041597">
+    <state width="1419" height="301" key="GridCell.Tab.0.left" timestamp="1590028580521">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1899" height="373" key="GridCell.Tab.0.left/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589399406226" />
-    <state width="1419" height="301" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1590028041597" />
+    <state width="1419" height="301" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1590028580521" />
     <state width="1419" height="245" key="GridCell.Tab.0.left/0.23.1440.805@0.23.1440.805" timestamp="1588808686162" />
     <state width="1899" height="373" key="GridCell.Tab.0.left/0.23.1440.877/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589393566325" />
-    <state width="1419" height="301" key="GridCell.Tab.0.right" timestamp="1590028041598">
+    <state width="1419" height="301" key="GridCell.Tab.0.right" timestamp="1590028580522">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1899" height="373" key="GridCell.Tab.0.right/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589399406229" />
-    <state width="1419" height="301" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1590028041598" />
+    <state width="1419" height="301" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1590028580522" />
     <state width="1419" height="245" key="GridCell.Tab.0.right/0.23.1440.805@0.23.1440.805" timestamp="1588808686163" />
     <state width="1899" height="373" key="GridCell.Tab.0.right/0.23.1440.877/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589393566327" />
     <state x="221" y="89" key="SettingsEditor" timestamp="1588809133046">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1588809133046" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1589760341512">
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1590028230255">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="-1493" y="228" key="Vcs.Push.Dialog.v2/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589394131547" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1589760341512" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1590028230255" />
     <state x="397" y="282" key="com.intellij.ide.util.TipDialog" timestamp="1590022003928">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

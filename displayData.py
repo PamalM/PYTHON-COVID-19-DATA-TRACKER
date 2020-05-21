@@ -18,6 +18,24 @@ warnings.filterwarnings("ignore")
 # Method displays the current confirmed, recovered, death count for a specific country, or worldwide.
 def display(countryCode, worldwide):
 
+    # Display selected country slug to terminal.
+    print("Selected: " + countryCode.upper())
+
+    # Fetch data from appropriate API depending on selection.
+    if worldwide is True:
+        displayValues = interpreter.getCases(worldwide=True)
+
+    else:
+        displayValues = interpreter.getCases(country=countryCode)
+
+    print("[Fetch Complete]\n")
+
+    # Store the fetched data into dictionaries for us to utilize.
+    confirmed = displayValues['Confirmed']
+    deaths = displayValues['Deaths']
+    recovered = displayValues['Recovered']
+    active = displayValues['Active']
+
     # Method displays the graph trend for the specific country/worldwide.
     def display_Graph():
 
@@ -89,24 +107,6 @@ def display(countryCode, worldwide):
             fig.canvas.set_window_title(countryCode.upper() + ' | COVID-19 TRACKER')
 
         plt.show()
-
-    # Display selected country slug to terminal.
-    print("Selected: " + countryCode.upper())
-
-    # Fetch data from appropriate API depending on selection.
-    if worldwide is True:
-        displayValues = interpreter.getCases(worldwide=True)
-
-    else:
-        displayValues = interpreter.getCases(country=countryCode)
-
-    print("[Fetch Complete]\n")
-
-    # Store the fetched data into dictionaries for us to utilize.
-    confirmed = displayValues['Confirmed']
-    deaths = displayValues['Deaths']
-    recovered = displayValues['Recovered']
-    active = displayValues['Active']
 
     # Create Graphical Window to display realtime statistics for country/worldwide selection.
     master = tk.Toplevel()
