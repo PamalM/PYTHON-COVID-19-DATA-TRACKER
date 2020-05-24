@@ -79,7 +79,7 @@ def display(countryCode, worldwide):
         NS = interpreter.getCases(province='Nova Scotia')
         r2 = tk.Radiobutton(frame1, text='Nova Scotia',value="Nova Scotia", var=province,
                             font=("Courier", 14, "bold"), bg='lightyellow', fg='gray9')
-        r2.grid(row=4, column=0, padx=30, pady=(20,0))
+        r2.grid(row=4, column=0)
         NS_Confirmed = tk.Label(frame1, background=widgetBG, font=("Courier", 12, "bold"))
         NS_Confirmed.config(text="Confirmed Cases: " + str(format(NS['Confirmed'], ",d")), fg=widgetFG)
         NS_Confirmed.grid(row=5, column=0)
@@ -93,7 +93,7 @@ def display(countryCode, worldwide):
         BC = interpreter.getCases(province='British Columbia')
         r4 = tk.Radiobutton(frame1, text='British Columbia', value="British Columbia", var=province,
                             font=("Courier", 14, "bold"), bg='lightyellow', fg='gray9')
-        r4.grid(row=8, column=0, pady=(20,0))
+        r4.grid(row=8, column=0)
         BC_Confirmed = tk.Label(frame1, background=widgetBG, font=("Courier", 12, "bold"))
         BC_Confirmed.config(text="Confirmed Cases: " + str(format(BC['Confirmed'], ",d")), fg=widgetFG)
         BC_Confirmed.grid(row=9, column=0)
@@ -121,7 +121,7 @@ def display(countryCode, worldwide):
         NL = interpreter.getCases(province='Newfoundland and Labrador')
         r8 = tk.Radiobutton(frame1, text='Newfoundland and Labrador', value="Newfoundland and Labrador", var=province,
                             font=("Courier", 14, "bold"), bg='lightyellow', fg='gray9')
-        r8.grid(row=4, column=1, padx=30, pady=(20,0))
+        r8.grid(row=4, column=1)
         NL_Confirmed = tk.Label(frame1, background=widgetBG, font=("Courier", 12, "bold"))
         NL_Confirmed.config(text="Confirmed Cases: " + str(format(NL['Confirmed'], ",d")), fg=widgetFG)
         NL_Confirmed.grid(row=5, column=1)
@@ -135,7 +135,7 @@ def display(countryCode, worldwide):
         PE = interpreter.getCases(province='Prince Edward Island')
         r3 = tk.Radiobutton(frame1, text='Prince Edward Island', value="Prince Edward Island", var=province,
                             font=("Courier", 14, "bold"), bg='lightyellow', fg='gray9')
-        r3.grid(row=8, column=1, pady=(20,0))
+        r3.grid(row=8, column=1)
         PE_Confirmed = tk.Label(frame1, background=widgetBG, font=("Courier", 12, "bold"))
         PE_Confirmed.config(text="Confirmed Cases: " + str(format(PE['Confirmed'], ",d")), fg=widgetFG)
         PE_Confirmed.grid(row=9, column=1)
@@ -163,7 +163,7 @@ def display(countryCode, worldwide):
         ON = interpreter.getCases(province='Ontario')
         r11 = tk.Radiobutton(frame1, text='Ontario', value="Ontario", var=province,
                              font=("Courier", 14, "bold"), bg='lightyellow', fg='gray9')
-        r11.grid(row=4, column=2, padx=60, pady=(20,0))
+        r11.grid(row=4, column=2)
         ON_Confirmed = tk.Label(frame1, background=widgetBG, font=("Courier", 12, "bold"))
         ON_Confirmed.config(text="Confirmed Cases: " + str(format(ON['Confirmed'], ",d")), fg=widgetFG)
         ON_Confirmed.grid(row=5, column=2)
@@ -177,7 +177,7 @@ def display(countryCode, worldwide):
         SK = interpreter.getCases(province='Saskatchewan')
         r9 = tk.Radiobutton(frame1, text='Saskatchewan', value="Saskatchewan", var=province,
                             font=("Courier", 14, "bold"), bg='lightyellow', fg='gray9')
-        r9.grid(row=8, column=2, pady=(20,0))
+        r9.grid(row=8, column=2)
         SK_Confirmed = tk.Label(frame1, background=widgetBG, font=("Courier", 12, "bold"))
         SK_Confirmed.config(text="Confirmed Cases: " + str(format(SK['Confirmed'], ",d")), fg=widgetFG)
         SK_Confirmed.grid(row=9, column=2)
@@ -205,7 +205,7 @@ def display(countryCode, worldwide):
         YT = interpreter.getCases(province='Yukon')
         r12 = tk.Radiobutton(frame1, text='Yukon',value="Yukon", var=province,
                              font=("Courier", 14, "bold"), bg='lightyellow', fg='gray9')
-        r12.grid(row=4, column=3, padx=60, pady=(20,0))
+        r12.grid(row=4, column=3)
         YT_Confirmed = tk.Label(frame1, background=widgetBG, font=("Courier", 12, "bold"))
         YT_Confirmed.config(text="Confirmed Cases: " + str(format(YT['Confirmed'], ",d")), fg=widgetFG)
         YT_Confirmed.grid(row=5, column=3)
@@ -219,7 +219,7 @@ def display(countryCode, worldwide):
         QC = interpreter.getCases(province='Quebec')
         r6 = tk.Radiobutton(frame1, text='Quebec', value="Quebec", var=province,
                             font=("Courier", 14, "bold"), bg='lightyellow', fg='gray9')
-        r6.grid(row=8, column=3, pady=(20,0))
+        r6.grid(row=8, column=3)
         QC_Confirmed = tk.Label(frame1, background=widgetBG, font=("Courier", 12, "bold"))
         QC_Confirmed.config(text="Confirmed Cases: " + str(format(QC['Confirmed'], ",d")), fg=widgetFG)
         QC_Confirmed.grid(row=9, column=3)
@@ -230,16 +230,16 @@ def display(countryCode, worldwide):
         QC_Death.config(text="Deaths: " + str(format(QC['Deaths'], ",d")), fg=widgetFG)
         QC_Death.grid(row=11, column=3)
 
-        frame1.grid(padx=22, pady=16)
+        frame1.grid(padx=22, pady=16, sticky=tk.W)
 
         graph_Button = tk.Button(alpha, text="Display Graph", height=2, width=30, fg="slate blue", font=("Courier", 20, "bold"))
         graph_Button.config(highlightbackground='pink', command=lambda: display_Graph(province.get()))
-        graph_Button.grid(row=3, column=0, columnspan=3, padx=(200, 200))
+        graph_Button.grid(row=3, column=0, columnspan=3, padx=(200, 200), pady=(10, 20))
 
         province.trace("w", monitor_Province)
 
         alpha.title('CANADIAN PROVINCIAL COVID-19 STATISTICS')
-        alpha.geometry("940x500")
+        alpha.geometry("820x480")
         alpha.resizable(False, False)
         alpha.configure(background="ivory2")
         alpha.mainloop()
