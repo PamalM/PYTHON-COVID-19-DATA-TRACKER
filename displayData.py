@@ -226,7 +226,7 @@ def display(countryCode, worldwide):
         SK_Death.config(text="Deaths: " + str(format(SK['Deaths'], ",d")), fg=widgetFG)
         SK_Death.pack()
 
-        frame3.grid(row=0, column=3, padx=0, pady=16)
+        frame3.grid(row=0, column=2, padx=0, pady=16)
 
         # Frame containing New Brunswick Stats.
         frame4 = tk.Frame(alpha, background=widgetBG, padx=18, pady=16)
@@ -284,11 +284,11 @@ def display(countryCode, worldwide):
         YT_Death.config(text="Deaths: " + str(format(YT['Deaths'], ",d")), fg=widgetFG)
         YT_Death.pack()
 
-        frame4.grid(row=0, column=4, padx=(0, 22), pady=16)
+        frame4.grid(row=0, column=3, padx=(0, 22), pady=16)
 
         graph_Button = tk.Button(alpha, text="Display Graph", height=2, width=30, fg="slate blue", font=("Courier", 20, "bold"))
         graph_Button.config(highlightbackground='pink', command=lambda: display_Graph(province.get()))
-        graph_Button.grid(row=3, column=2, columnspan=3)
+        graph_Button.grid(row=3, column=2, columnspan=3, padx=(0, 22))
 
         label1 = tk.Label(alpha, text="SELECT A PROVINCE:", bg="gray30", fg="light yellow", font=("Courier", 24, "bold"))
         label1.grid(row=3, column=0, columnspan=2)

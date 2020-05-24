@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="52be5131-cd8f-48f6-b35d-fb0786034c78" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/displayData.py" beforeDir="false" afterPath="$PROJECT_DIR$/displayData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,7 +228,21 @@
       <option name="project" value="LOCAL" />
       <updated>1590028625506</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="- Display statistics for all provinces within Canada (No data available for Nunavut on API, so we ommitted it.)&#10;- Display_Graph() method now allows for provincial data to be displayed as a trend. &#10;- TODO: Complete [News] Functionality of application; Fetch live COVID-19 data for the specific country, province, etc.">
+      <created>1590286498781</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1590286498781</updated>
+    </task>
+    <task id="LOCAL-00017" summary="- Display statistics for all provinces within Canada (No data available for Nunavut on API, so we ommitted it.)&#10;- Display_Graph() method now allows for provincial data to be displayed as a trend. &#10;- TODO: Complete [News] Functionality of application; Fetch live COVID-19 data for the specific country, province, etc.">
+      <created>1590286560267</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1590286560267</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -245,44 +257,46 @@
     <MESSAGE value="- Formatted the graph, changed the ticks for death count&#10;- Made graph display dates in intervals of months. &#10;- Added button that introduces the news api feature" />
     <MESSAGE value="- Display worldwide statistics&#10;- Graph displays trend for worldwide cases over a course of the last 4 months. &#10;- TODO: Implement the display of worldwide stats, and specific countries stats into one method. [To minimize double code]" />
     <MESSAGE value="- Major code reform. Changed large chunks of code in displayData.py&#10;- Removed seperate method for worldwide selection, instead now one method handles the display of the statistics and if statements are used to differentiate between specific country/worldwide radio button selection.&#10;&#10;- TODO: Implement API fetch/display of News functionality. &#10;- TODO: Display individual provincial/state data for countries. &#10;- TODO: Implement third function for worldwide selection." />
-    <option name="LAST_COMMIT_MESSAGE" value="- Major code reform. Changed large chunks of code in displayData.py&#10;- Removed seperate method for worldwide selection, instead now one method handles the display of the statistics and if statements are used to differentiate between specific country/worldwide radio button selection.&#10;&#10;- TODO: Implement API fetch/display of News functionality. &#10;- TODO: Display individual provincial/state data for countries. &#10;- TODO: Implement third function for worldwide selection." />
+    <MESSAGE value="- Display statistics for all provinces within Canada (No data available for Nunavut on API, so we ommitted it.)&#10;- Display_Graph() method now allows for provincial data to be displayed as a trend. &#10;- TODO: Complete [News] Functionality of application; Fetch live COVID-19 data for the specific country, province, etc." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Display statistics for all provinces within Canada (No data available for Nunavut on API, so we ommitted it.)&#10;- Display_Graph() method now allows for provincial data to be displayed as a trend. &#10;- TODO: Complete [News] Functionality of application; Fetch live COVID-19 data for the specific country, province, etc." />
   </component>
   <component name="WindowStateProjectService">
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588714374641">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1588714374641" />
-    <state x="0" y="15" key="CommitChangelistDialog2" timestamp="1590286498282">
+    <state x="0" y="15" key="CommitChangelistDialog2" timestamp="1590286560108">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="-1920" y="18" key="CommitChangelistDialog2/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589394126237" />
-    <state x="0" y="15" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1590286498282" />
-    <state width="1419" height="301" key="GridCell.Tab.0.bottom" timestamp="1590286536504">
+    <state x="0" y="15" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1590286560108" />
+    <state width="1419" height="301" key="GridCell.Tab.0.bottom" timestamp="1590289700612">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1899" height="373" key="GridCell.Tab.0.bottom/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589399406230" />
-    <state width="1419" height="301" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1590286536504" />
+    <state width="1419" height="301" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1590289700612" />
     <state width="1419" height="301" key="GridCell.Tab.0.bottom/0.23.1440.805@0.23.1440.805" timestamp="1590189640121" />
     <state width="1899" height="373" key="GridCell.Tab.0.bottom/0.23.1440.877/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589393566329" />
-    <state width="1419" height="301" key="GridCell.Tab.0.center" timestamp="1590286536503">
+    <state width="1419" height="301" key="GridCell.Tab.0.center" timestamp="1590289700611">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1899" height="373" key="GridCell.Tab.0.center/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589399406227" />
-    <state width="1419" height="301" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1590286536503" />
+    <state width="1419" height="301" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1590289700611" />
+    <state width="1419" height="301" key="GridCell.Tab.0.center/0.23.1440.805@0.0.1440.828" timestamp="1590287267813" />
     <state width="1419" height="301" key="GridCell.Tab.0.center/0.23.1440.805@0.23.1440.805" timestamp="1590189640120" />
     <state width="1899" height="373" key="GridCell.Tab.0.center/0.23.1440.877/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589393566326" />
-    <state width="1419" height="301" key="GridCell.Tab.0.left" timestamp="1590286536502">
+    <state width="1419" height="301" key="GridCell.Tab.0.left" timestamp="1590289700610">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1899" height="373" key="GridCell.Tab.0.left/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589399406226" />
-    <state width="1419" height="301" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1590286536502" />
-    <state width="1419" height="301" key="GridCell.Tab.0.left/0.23.1440.805@0.23.1440.805" timestamp="1590189640120" />
+    <state width="1419" height="301" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1590289700610" />
+    <state width="1419" height="301" key="GridCell.Tab.0.left/0.23.1440.805@0.23.1440.805" timestamp="1590287267799" />
     <state width="1899" height="373" key="GridCell.Tab.0.left/0.23.1440.877/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589393566325" />
-    <state width="1419" height="301" key="GridCell.Tab.0.right" timestamp="1590286536503">
+    <state width="1419" height="301" key="GridCell.Tab.0.right" timestamp="1590289700611">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1899" height="373" key="GridCell.Tab.0.right/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589399406229" />
-    <state width="1419" height="301" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1590286536503" />
+    <state width="1419" height="301" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1590289700611" />
     <state width="1419" height="301" key="GridCell.Tab.0.right/0.23.1440.805@0.23.1440.805" timestamp="1590189640121" />
     <state width="1899" height="373" key="GridCell.Tab.0.right/0.23.1440.877/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589393566327" />
     <state x="377" y="209" key="MultipleFileMergeDialog" timestamp="1590286527164">
@@ -293,16 +307,16 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1588809133046" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1590286504312">
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1590286566668">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="-1493" y="228" key="Vcs.Push.Dialog.v2/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589394131547" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1590286504312" />
-    <state x="397" y="282" key="com.intellij.ide.util.TipDialog" timestamp="1590270184533">
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1590286566668" />
+    <state x="397" y="282" key="com.intellij.ide.util.TipDialog" timestamp="1590289571105">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="397" y="282" key="com.intellij.ide.util.TipDialog/0.0.1440.900/-1920.0.1920.1080@0.0.1440.900" timestamp="1589392884503" />
-    <state x="397" y="282" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1590270184533" />
+    <state x="397" y="282" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1590289571105" />
     <state x="397" y="282" key="com.intellij.ide.util.TipDialog/0.23.1440.805@0.23.1440.805" timestamp="1588714258608" />
     <state x="503" y="374" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1590003818198">
       <screen x="0" y="0" width="1440" height="900" />
