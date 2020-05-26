@@ -106,7 +106,7 @@ def display(countryCode, worldwide):
         BC_Death.config(text="Deaths: " + str(format(BC['Deaths'], ",d")), fg=widgetFG)
         BC_Death.pack()
 
-        leftFrame.pack(side=tk.LEFT, padx=20, pady=15)
+        leftFrame.pack(side=tk.LEFT, padx=40, pady=15)
 
         left2_Frame = tk.Frame(province_Frame, background=widgetBG)
 
@@ -152,7 +152,7 @@ def display(countryCode, worldwide):
         NL_Death.config(text="Deaths: " + str(format(NL['Deaths'], ",d")), fg=widgetFG)
         NL_Death.pack()
         
-        left2_Frame.pack(side=tk.LEFT, padx=15, pady=15)
+        left2_Frame.pack(side=tk.LEFT, pady=15)
         
         right2_Frame = tk.Frame(province_Frame, background=widgetBG)
 
@@ -198,7 +198,7 @@ def display(countryCode, worldwide):
         QC_Death.config(text="Deaths: " + str(format(QC['Deaths'], ",d")), fg=widgetFG)
         QC_Death.pack()
         
-        right2_Frame.pack(side=tk.LEFT, padx=20, pady=15)
+        right2_Frame.pack(side=tk.LEFT, padx=40, pady=15)
 
         rightFrame = tk.Frame(province_Frame, background=widgetBG)
         
@@ -244,19 +244,19 @@ def display(countryCode, worldwide):
         SK_Death.config(text="Deaths: " + str(format(SK['Deaths'], ",d")), fg=widgetFG)
         SK_Death.pack()
 
-        rightFrame.pack(side=tk.LEFT, padx=20, pady=15)
+        rightFrame.pack(side=tk.LEFT, pady=15)
 
         province_Frame.pack(fill='x', padx=30)
 
         # Graph button directs user to graph trend of province COVID-19 trend.
         graph_Button = tk.Button(alpha, text="Display Graph", height=2, width=30, fg="slate blue", font=("Courier", 20, "bold"))
         graph_Button.config(highlightbackground='pink', command=lambda: display_Graph(province.get()))
-        graph_Button.pack(fill='x', padx=30, pady=50)
+        graph_Button.pack(fill='x', padx=30, pady=10)
 
         province.trace("w", monitor_Province)
 
         alpha.title('CANADIAN PROVINCIAL COVID-19 STATISTICS')
-        alpha.geometry("900x500")
+        alpha.geometry("1000x400")
         alpha.resizable(False, False)
         alpha.configure(background="ivory2")
         alpha.mainloop()
