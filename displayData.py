@@ -251,12 +251,12 @@ def display(countryCode, worldwide):
         # Graph button directs user to graph trend of province COVID-19 trend.
         graph_Button = tk.Button(alpha, text="Display Graph", height=2, width=30, fg="slate blue", font=("Courier", 20, "bold"))
         graph_Button.config(highlightbackground='pink', command=lambda: display_Graph(province.get()))
-        graph_Button.pack(fill='x', padx=30, pady=10)
+        graph_Button.pack(fill='x', padx=30, pady=50)
 
         province.trace("w", monitor_Province)
 
         alpha.title('CANADIAN PROVINCIAL COVID-19 STATISTICS')
-        alpha.geometry("900x400")
+        alpha.geometry("900x500")
         alpha.resizable(False, False)
         alpha.configure(background="ivory2")
         alpha.mainloop()
@@ -399,14 +399,15 @@ def display(countryCode, worldwide):
         stateButton.config(highlightbackground='pink', command=lambda: display_Provinces(), font=("Courier", 20, "bold"))
         stateButton.pack(fill='x', padx=30, pady=10)
 
+    '''
     # Draw button to direct user to a graph trend of the selected country/worldwide COVID cases.
     newsButton = tk.Button(master, text="News", height=2, fg="slate blue", font=("Courier", 20, "bold"))
     newsButton.config(highlightbackground='pink', command=lambda: print('News Button'))
     newsButton.pack(fill='x', padx=30, pady=10)
+    '''
 
     # GUI's attributes.
     master.resizable(False, False)
     master.configure(background="ivory2")
     master.geometry("600x600")
     master.mainloop()
-    
