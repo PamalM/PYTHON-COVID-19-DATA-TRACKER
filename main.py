@@ -132,14 +132,14 @@ def selection_GUI():
     worldwide_Frame.pack(fill='x', padx=30)
 
     # Display the next button.
-    nextButton.pack(fill='x', padx=120, pady=(10, 0))
+    nextButton.pack(fill='x', padx=120, pady=20)
 
     # Monitors when a valid radio button selection is made; Thus enabling the next button.
     country.trace("w", monitorCountry)
 
     # GUI attributes; (Window size, bg color, title, etc.)
-    root.resizable(False, False)
     root.geometry("800x500")
+    root.minsize(650, 500)
     root.configure(background="ivory2")
     root.title("COVID-19 TRACKER")
     root.mainloop()
