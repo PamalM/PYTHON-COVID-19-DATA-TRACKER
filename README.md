@@ -1,13 +1,9 @@
 # COVID-19-DATA-TRACKER
     
-**Project Documentation:**    
-https://drive.google.com/open?id=1Hn9y1LzmmYaC-9JFyxvaXLM0P3F_W8oe
 
-*The link contains all relevant documentation for the project.*
+**Example: Canada**
 
-**Sample output:**
-
-![France:](doc/doc1.gif)
+![Project Sample:](doc/doc1.gif)
 
     Project Description:
 The goal with this project was to implement a live COVID-19 (Coronavirus) statistics tracker. The user has the ability to view statistics for worldwide, and/or specific stats for a given country. Currently, the solution is only implemented for 6 selected countries, but more countries will be added in the near future, or as demand requires. 
