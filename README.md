@@ -1,7 +1,9 @@
 # COVID-19-DATA-TRACKER
     
+    Project Description:   
+The goal of this project was to implement a live COVID-19 (2019 - CoronaVirus) statistics tracker. 
 
-**Example: Canada**
+**Output:**
 
 ![Project Sample:](doc/doc1.gif)
 
