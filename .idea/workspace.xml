@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="52be5131-cd8f-48f6-b35d-fb0786034c78" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/doc/doc2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sample_Output.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/doc1.gif" beforeDir="false" afterPath="$PROJECT_DIR$/doc/doc1.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/doc2.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/doc3.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,7 +295,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590706935997</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="- Added folder containing sample output.&#10;TODO: Update Readme with final build of instructions on how to execute application.">
+      <created>1590710670707</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1590710670707</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -310,18 +320,19 @@
     <MESSAGE value="- Display statistics for all provinces within Canada (No data available for Nunavut on API, so we ommitted it.)&#10;- Display_Graph() method now allows for provincial data to be displayed as a trend. &#10;- TODO: Complete [News] Functionality of application; Fetch live COVID-19 data for the specific country, province, etc." />
     <MESSAGE value="- Padding/Layout changes to provinces.&#10;- Fixed padding issues that caused provinces on right side to be drawn off screen." />
     <MESSAGE value="- Added functionality for full screen view.&#10;- Re-arranged provinces to be displayed in a list format.&#10;- News Function removed; Not to be implemented." />
-    <option name="LAST_COMMIT_MESSAGE" value="- Added functionality for full screen view.&#10;- Re-arranged provinces to be displayed in a list format.&#10;- News Function removed; Not to be implemented." />
+    <MESSAGE value="- Added folder containing sample output.&#10;TODO: Update Readme with final build of instructions on how to execute application." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Added folder containing sample output.&#10;TODO: Update Readme with final build of instructions on how to execute application." />
   </component>
   <component name="WindowStateProjectService">
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590708036027">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1590708036027" />
-    <state x="0" y="15" key="CommitChangelistDialog2" timestamp="1590706935656">
+    <state x="0" y="15" key="CommitChangelistDialog2" timestamp="1590710669325">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="-1920" y="18" key="CommitChangelistDialog2/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589394126237" />
-    <state x="0" y="15" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1590706935656" />
+    <state x="0" y="15" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1590710669325" />
     <state width="1419" height="301" key="GridCell.Tab.0.bottom" timestamp="1590710615762">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -385,11 +396,11 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1588809133046" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1590706941813">
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1590710743038">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="-1493" y="228" key="Vcs.Push.Dialog.v2/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589394131547" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1590706941813" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1590710743038" />
     <state x="397" y="282" key="com.intellij.ide.util.TipDialog" timestamp="1590628162940">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
