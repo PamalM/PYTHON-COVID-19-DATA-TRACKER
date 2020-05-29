@@ -1,21 +1,13 @@
 # COVID-19-DATA-TRACKER
     
     Project Description:   
-The goal of this project was to implement a live COVID-19 (2019 - CoronaVirus) statistics tracker. 
+The goal of this project was to implement a COVID-19 (2019 - CoronaVirus) statistics tracker. This application allows users to fetch real-time statistics conerning the # confirmed, active, recovered and deaths for 6 individual countries. The user also has the ability to view statistics for the world as a whole. We have also chosen to show individual statistics for Canada's 13 provinces and territories. This application also allows for visual graph trends that showcase COVID-19 statistics over a few months time. 
 
-**Output:**
+**Sample Output for Canada:**
 
 ![Project Sample:](doc/doc1.gif)
 
-    Project Description:
-The goal with this project was to implement a live COVID-19 (Coronavirus) statistics tracker. The user has the ability to view statistics for worldwide, and/or specific stats for a given country. Currently, the solution is only implemented for 6 selected countries, but more countries will be added in the near future, or as demand requires. 
+    Key Concepts:
+This project focuses heavily on API fetching, to retrieve and update information. We have also chosen to store the data locally on the user's machine whilst they execute the application. In addition, we utilized the matplotlib library to visualize the data into a graph format. Then, the tkinter module was utilized to create the Graphical User Interface. 
 
-This Python script allows users to display live up to date information right on their desktop. We utilized key concepts such as json parsing, the tkinter, and matplotlib libraries. We will allow the user to see information for today's date, and view a graphical depiction of the last month's COVID-19 trend. Displaying information is one aspect, but analyzing trends is another goal with this project. In addition, the applicaiton will have additional features such as: Live vaccine updates, news relating to COVID-19 worldwide, and relevant stock data for companies that are on the front-lines of fighting the virus. 
 
-Currently we have a discord server setup for the team working on the project. All communication is conducted through that server. If you wish to participate in the development of this project, please get in contact with me to be added to the team. 
-In your email, please include your full name, github username, and email/phone contact method for verifying your legitimacy. 
-
-Thanks for visiting the repo, if you have any questions please feel free to contact me. 
-Pamal13@Hotmail.com, 
-
-Stay safe, and hopefully life as we know it, can return back to normal!
